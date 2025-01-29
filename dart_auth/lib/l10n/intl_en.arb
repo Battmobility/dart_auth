@@ -1,0 +1,28 @@
+{
+	"@@locale": "en",
+	"loginTitle": "Log in",
+	"@loginTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginButtonTitle": "Log in",
+	"@loginButtonTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorShortUsername": "Username must be at least 6 characters long",
+	"@loginErrorShortUsername": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorShortPassword": "Password must be at least 6 characters long",
+	"@loginErrorShortPassword": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorMessage": "Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.",
+	"@loginErrorMessage": {
+		"type": "text",
+		"placeholders": {}
+	}
+}

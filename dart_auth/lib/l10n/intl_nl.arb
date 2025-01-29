@@ -1,0 +1,28 @@
+{
+	"@@locale": "nl",
+	"loginTitle": "Meld je aan",
+	"@loginTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginButtonTitle": "Log in",
+	"@loginButtonTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorShortUsername": "Gebruikersnaam moet minstens zes karakters lang zijn",
+	"@loginErrorShortUsername": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorShortPassword": "Wachtwoord moet minstens zes karakters lang zijn",
+	"@loginErrorShortPassword": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorMessage": "Er ging iets verkeerd bij het afmelden. Gelieve te controleren of je verbinding hebt met internet en probeer daarna opnieuw.",
+	"@loginErrorMessage": {
+		"type": "text",
+		"placeholders": {}
+	}
+}
