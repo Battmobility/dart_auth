@@ -24,36 +24,38 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (didPop, _) {
-        if (didPop) {
-          return;
-        } else {}
-      },
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text(AppLocalizations.of(context).loginTitle,
-                    style: Theme.of(context).textTheme.headlineMedium),
-              ),
-              if (widget.reason != null)
+    return Scaffold(
+      body: PopScope(
+        canPop: true,
+        onPopInvokedWithResult: (didPop, _) {
+          if (didPop) {
+            return;
+          } else {}
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: Text(widget.reason!,
-                      style: Theme.of(context).textTheme.bodyMedium),
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Text(AppLocalizations.of(context).loginTitle,
+                      style: Theme.of(context).textTheme.headlineMedium),
                 ),
-              LoginEntryWidget(
-                authRepo: widget.authRepo,
-                onLogin: widget.onLogin,
-                onException: widget.onException,
-              ),
-            ],
+                if (widget.reason != null)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Text(widget.reason!,
+                        style: Theme.of(context).textTheme.bodyMedium),
+                  ),
+                LoginEntryWidget(
+                  authRepo: widget.authRepo,
+                  onLogin: widget.onLogin,
+                  onException: widget.onException,
+                ),
+              ],
+            ),
           ),
         ),
       ),
