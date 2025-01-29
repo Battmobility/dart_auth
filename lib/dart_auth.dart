@@ -1,6 +1,8 @@
 import 'package:dart_auth/authentication/domain/domain.dart';
 import 'package:flutter/material.dart';
 
+import 'authentication/presentation/screens/login_screen.dart';
+
 Future<void> login(
     {required Accesstoken? accessToken,
     required BuildContext context,
@@ -12,9 +14,26 @@ Future<void> login(
           await authenticationRepository.refreshToken(token: accessToken);
       onLogin(refreshedToken);
     } catch (e) {
-      onException(e);
+      await _getNewToken(
+          context: context, onLogin: onLogin, onException: onException);
     }
   } else {
-    onException(Exception('No token provided.'));
+    await _getNewToken(
+        context: context, onLogin: onLogin, onException: onException);
   }
+}
+
+Future<void> _getNewToken(
+    {required BuildContext context,
+    required Function(Accesstoken) onLogin,
+    required Function(Object) onException}) async {
+  showDialog(
+      context: context,
+      builder: (_) {
+        return LoginPage(
+          authRepo: authenticationRepository,
+          onLogin: onLogin,
+          onException: onException,
+        );
+      });
 }
