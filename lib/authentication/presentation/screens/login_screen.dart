@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../widgets/login_entry_widget.dart';
 
 class LoginPage extends StatefulWidget {
-  final AuthRepository authRepo;
   final Function(Accesstoken) onLogin;
   final Function(Object) onException;
   final String? reason;
@@ -13,7 +12,6 @@ class LoginPage extends StatefulWidget {
   const LoginPage(
       {super.key,
       this.reason,
-      required this.authRepo,
       required this.onLogin,
       required this.onException});
 
@@ -51,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: Theme.of(context).textTheme.bodyMedium),
                   ),
                 LoginEntryWidget(
-                  authRepo: widget.authRepo,
+                  authRepo: authenticationRepository,
                   onLogin: widget.onLogin,
                   onException: widget.onException,
                 ),
