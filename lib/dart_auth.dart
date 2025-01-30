@@ -23,6 +23,21 @@ Future<void> login(
   }
 }
 
+Future<void> loginUser(
+    {required String userName,
+    required String password,
+    required BuildContext context,
+    required Function(Accesstoken) onLogin,
+    required Function(Object) onException}) async {
+  try {
+    final refreshedToken = await authenticationRepository.loginUser(
+        userName: userName, password: password);
+    onLogin(refreshedToken);
+  } catch (e) {
+    onException(e);
+  }
+}
+
 Future<void> _getNewToken(
     {required BuildContext context,
     required Function(Accesstoken) onLogin,
