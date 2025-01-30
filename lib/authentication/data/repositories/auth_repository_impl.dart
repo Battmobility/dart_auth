@@ -1,4 +1,5 @@
 import 'package:dart_auth/authentication/domain/domain.dart';
+import 'package:dart_auth/authentication/domain/exceptions/exceptions.dart';
 import '../datasource/auth_remote_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -19,6 +20,12 @@ class AuthRepositoryImpl implements AuthRepository {
     if (token.isValid && ifNeeded) {
       return Future.value(token);
     }
-    return authenticationDataSource.refreshToken(token: token);
+    if (token.isRefreshValid) {
+      return authenticationDataSource.refreshToken(token: token);
+    } else if (token.refreshToken == null) {
+      throw MissingRefreshTokenException();
+    } else {
+      throw ExpiredRefreshTokenException();
+    }
   }
 }

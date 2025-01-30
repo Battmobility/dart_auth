@@ -3,8 +3,8 @@ import 'auth_localizations.dart';
 // ignore_for_file: type=lint
 
 /// The translations for Dutch Flemish (`nl`).
-class AppLocalizationsNl extends AppLocalizations {
-  AppLocalizationsNl([String locale = 'nl']) : super(locale);
+class AuthLocalizationsNl extends AuthLocalizations {
+  AuthLocalizationsNl([String locale = 'nl']) : super(locale);
 
   @override
   String get loginTitle => 'Meld je aan';

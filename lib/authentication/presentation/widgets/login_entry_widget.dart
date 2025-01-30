@@ -40,10 +40,12 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                 autofocus: true,
                 validator: (value) {
                   if (value == null) {
-                    return AppLocalizations.of(context).loginErrorShortUsername;
+                    return AuthLocalizations.of(context)
+                        .loginErrorShortUsername;
                   }
                   if (value.length < 4) {
-                    return AppLocalizations.of(context).loginErrorShortUsername;
+                    return AuthLocalizations.of(context)
+                        .loginErrorShortUsername;
                   } else {
                     return null;
                   }
@@ -52,10 +54,12 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
               TextFormField(
                 validator: (value) {
                   if (value == null) {
-                    return AppLocalizations.of(context).loginErrorShortPassword;
+                    return AuthLocalizations.of(context)
+                        .loginErrorShortPassword;
                   }
                   if (value.length < 6) {
-                    return AppLocalizations.of(context).loginErrorShortPassword;
+                    return AuthLocalizations.of(context)
+                        .loginErrorShortPassword;
                   } else {
                     return null;
                   }
@@ -71,7 +75,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                 },
               ),
               OutlinedButton(
-                  child: Text(AppLocalizations.of(context).loginButtonTitle),
+                  child: Text(AuthLocalizations.of(context).loginButtonTitle),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _login(emailController.text, passwordController.text);

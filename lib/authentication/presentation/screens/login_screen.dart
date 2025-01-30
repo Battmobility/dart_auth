@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Text(AppLocalizations.of(context).loginTitle,
+                    child: Text(AuthLocalizations.of(context).loginTitle,
                         style: Theme.of(context).textTheme.headlineMedium),
                   ),
                   if (widget.reason != null)
