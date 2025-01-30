@@ -37,3 +37,7 @@ Future<void> _getNewToken(
         );
       });
 }
+
+Future<Accesstoken> refreshToken({required Accesstoken accessToken}) async {
+  return await authenticationRepository.refreshToken(token: accessToken);
+}
