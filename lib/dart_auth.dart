@@ -31,7 +31,6 @@ Future<void> _getNewToken(
       context: context,
       builder: (_) {
         return LoginPage(
-          authRepo: authenticationRepository,
           onLogin: onLogin,
           onException: onException,
         );
