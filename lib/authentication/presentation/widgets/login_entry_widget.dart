@@ -1,3 +1,4 @@
+import 'package:batt_ds/molecules/buttons/buttons.dart';
 import 'package:dart_auth/authentication/domain/domain.dart';
 import 'package:dart_auth/l10n/auth_localizations.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
           padding: EdgeInsets.all(22),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
                 controller: emailController,
@@ -74,8 +76,8 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                   }
                 },
               ),
-              OutlinedButton(
-                  child: Text(AuthLocalizations.of(context).loginButtonTitle),
+              OrangeSolidTextButton(
+                  label: AuthLocalizations.of(context).loginButtonTitle,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _login(emailController.text, passwordController.text);
