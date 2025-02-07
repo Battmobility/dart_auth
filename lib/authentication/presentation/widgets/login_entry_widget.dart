@@ -26,69 +26,72 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
-    return SingleChildScrollView(
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.all(22),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                controller: emailController,
-                autofillHints: const [AutofillHints.email],
-                keyboardType: TextInputType.emailAddress,
-                autofocus: true,
-                validator: (value) {
-                  if (value == null) {
-                    return AuthLocalizations.of(context)
-                        .loginErrorShortUsername;
-                  }
-                  if (value.length < 4) {
-                    return AuthLocalizations.of(context)
-                        .loginErrorShortUsername;
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value == null) {
-                    return AuthLocalizations.of(context)
-                        .loginErrorShortPassword;
-                  }
-                  if (value.length < 6) {
-                    return AuthLocalizations.of(context)
-                        .loginErrorShortPassword;
-                  } else {
-                    return null;
-                  }
-                },
-                controller: passwordController,
-                obscureText: true,
-                autofillHints: const [AutofillHints.password],
-                keyboardType: TextInputType.text,
-                onEditingComplete: () async {
-                  if (_formKey.currentState!.validate()) {
-                    _login(emailController.text, passwordController.text);
-                  }
-                },
-              ),
-              OrangeSolidTextButton(
-                  label: AuthLocalizations.of(context).loginButtonTitle,
-                  onPressed: () {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 1000),
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.all(22),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  controller: emailController,
+                  autofillHints: const [AutofillHints.email],
+                  keyboardType: TextInputType.emailAddress,
+                  autofocus: true,
+                  validator: (value) {
+                    if (value == null) {
+                      return AuthLocalizations.of(context)
+                          .loginErrorShortUsername;
+                    }
+                    if (value.length < 4) {
+                      return AuthLocalizations.of(context)
+                          .loginErrorShortUsername;
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null) {
+                      return AuthLocalizations.of(context)
+                          .loginErrorShortPassword;
+                    }
+                    if (value.length < 6) {
+                      return AuthLocalizations.of(context)
+                          .loginErrorShortPassword;
+                    } else {
+                      return null;
+                    }
+                  },
+                  controller: passwordController,
+                  obscureText: true,
+                  autofillHints: const [AutofillHints.password],
+                  keyboardType: TextInputType.text,
+                  onEditingComplete: () async {
                     if (_formKey.currentState!.validate()) {
                       _login(emailController.text, passwordController.text);
                     }
-                  })
-            ]
-                .map((e) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: e,
-                    ))
-                .toList(),
+                  },
+                ),
+                OrangeSolidTextButton(
+                    label: AuthLocalizations.of(context).loginButtonTitle,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _login(emailController.text, passwordController.text);
+                      }
+                    })
+              ]
+                  .map((e) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: 6),
+                        child: e,
+                      ))
+                  .toList(),
+            ),
           ),
         ),
       ),
