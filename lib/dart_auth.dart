@@ -11,7 +11,7 @@ Future<void> login(
   if (accessToken != null) {
     try {
       final refreshedToken =
-          await authenticationRepository.refreshToken(token: accessToken);
+          await authenticationRepository.refreshAccessToken(token: accessToken);
       onLogin(refreshedToken);
     } catch (e) {
       await _getNewToken(
@@ -30,7 +30,7 @@ Future<void> loginUser(
     required Function(Object) onException}) async {
   try {
     final refreshedToken =
-        await authenticationRepository.refreshToken(token: token);
+        await authenticationRepository.refreshAccessToken(token: token);
     onLogin(refreshedToken);
   } catch (e) {
     onException(e);
@@ -51,6 +51,11 @@ Future<void> _getNewToken(
       });
 }
 
-Future<Accesstoken> refreshToken({required Accesstoken accessToken}) async {
-  return await authenticationRepository.refreshToken(token: accessToken);
+Future<Accesstoken> refreshAccessToken(
+    {required Accesstoken accessToken}) async {
+  return await authenticationRepository.refreshAccessToken(token: accessToken);
+}
+
+Future<Accesstoken?> refreshToken(String refreshToken) async {
+  return authenticationRepository.refreshToken(refreshToken: refreshToken);
 }

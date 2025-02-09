@@ -5,7 +5,7 @@ import '../services/auth_network_service.dart';
 abstract interface class AuthenticationDataSource {
   Future<Accesstoken> loginUser(
       {required String userName, required String password});
-  Future<Accesstoken> refreshToken({required Accesstoken token});
+  Future<Accesstoken> refreshToken({required String refreshToken});
 }
 
 class RemoteAuthenticationDataSource implements AuthenticationDataSource {
@@ -20,7 +20,7 @@ class RemoteAuthenticationDataSource implements AuthenticationDataSource {
   }
 
   @override
-  Future<Accesstoken> refreshToken({required Accesstoken token}) async {
-    return await networkService.refreshAuthToken(token);
+  Future<Accesstoken> refreshToken({required String refreshToken}) async {
+    return networkService.refreshAuthToken(refreshToken);
   }
 }

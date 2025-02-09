@@ -28,15 +28,12 @@ final class DioAuthNetworkService implements AuthNetworkService {
   }
 
   @override
-  Future<Accesstoken> refreshAuthToken(Accesstoken token) async {
-    if (token.refreshToken == null) {
-      throw Exception("Refresh token missing");
-    }
+  Future<Accesstoken> refreshAuthToken(String refreshToken) async {
     final response = await service.post(
       "/protocol/openid-connect/token",
       data: {
         'client_id': clientId,
-        'refresh_token': token.refreshToken,
+        'refresh_token': refreshToken,
         'grant_type': grantTypeRefresh
       },
       options: Options(contentType: Headers.formUrlEncodedContentType),

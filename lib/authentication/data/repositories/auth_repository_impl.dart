@@ -15,17 +15,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Accesstoken> refreshToken(
+  Future<Accesstoken> refreshAccessToken(
       {required Accesstoken token, bool ifNeeded = false}) {
     if (token.isValid && ifNeeded) {
       return Future.value(token);
     }
     if (token.isRefreshValid) {
-      return authenticationDataSource.refreshToken(token: token);
+      return refreshToken(refreshToken: token.refreshToken!);
     } else if (token.refreshToken == null) {
       throw MissingRefreshTokenException();
     } else {
       throw ExpiredRefreshTokenException();
     }
+  }
+
+  @override
+  Future<Accesstoken> refreshToken({required String refreshToken}) {
+    return authenticationDataSource.refreshToken(refreshToken: refreshToken);
   }
 }

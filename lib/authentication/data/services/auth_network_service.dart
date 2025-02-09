@@ -2,5 +2,5 @@ import 'package:dart_auth/authentication/domain/domain.dart';
 
 abstract interface class AuthNetworkService {
   Future<Accesstoken> getAuthToken(String userName, String password);
-  Future<Accesstoken> refreshAuthToken(Accesstoken token);
+  Future<Accesstoken> refreshAuthToken(String refreshToken);
 }
