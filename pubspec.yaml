@@ -19,7 +19,7 @@ dependencies:
   batt_ds:
     #path: ../batt_ds
     git:
-      url: https://github.com/Battmobility/be.battmobility.batt_ds
+      url: git@github.com:Battmobility/be.battmobility.batt_ds.git
       ref: 'main'
 
 dev_dependencies:
