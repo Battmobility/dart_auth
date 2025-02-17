@@ -4,7 +4,7 @@ import 'services/dio_auth_network_service.dart';
 
 final authNetworkService = DioAuthNetworkService(
     service: Dio(BaseOptions(
-  baseUrl: "https://keycloak-staging.battmobility.be/auth/realms/Battmobiel",
+  baseUrl: "https://keycloak-staging.battmobility.be/realms/Battmobiel",
 )));
 
 final authDatasource =
