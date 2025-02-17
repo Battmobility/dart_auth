@@ -20,7 +20,7 @@ class LoginEntryWidget extends StatefulWidget {
 
 class _LoginEntryWidgetState extends State<LoginEntryWidget> {
   final _formKey = GlobalKey<FormState>();
-
+  bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
@@ -56,6 +56,18 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                   },
                 ),
                 TextFormField(
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscurePassword
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                  ),
                   validator: (value) {
                     if (value == null) {
                       return AuthLocalizations.of(context)
@@ -69,7 +81,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                     }
                   },
                   controller: passwordController,
-                  obscureText: true,
+                  obscureText: _obscurePassword,
                   autofillHints: const [AutofillHints.password],
                   keyboardType: TextInputType.text,
                   onEditingComplete: () async {
