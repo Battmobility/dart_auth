@@ -21,11 +21,12 @@ class LoginEntryWidget extends StatefulWidget {
 class _LoginEntryWidgetState extends State<LoginEntryWidget> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
+
+  String userName = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 1000),
       child: SingleChildScrollView(
@@ -38,10 +39,12 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
-                  controller: emailController,
+                  //controller: emailController,
                   autofillHints: const [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
+                  onChanged: (value) => userName = value,
+                  initialValue: userName,
                   validator: (value) {
                     if (value == null) {
                       return AuthLocalizations.of(context)
@@ -68,6 +71,8 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                       },
                     ),
                   ),
+                  onChanged: (value) => password = value,
+                  initialValue: password,
                   validator: (value) {
                     if (value == null) {
                       return AuthLocalizations.of(context)
@@ -80,13 +85,13 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                       return null;
                     }
                   },
-                  controller: passwordController,
+                  //controller: passwordController,
                   obscureText: _obscurePassword,
                   autofillHints: const [AutofillHints.password],
                   keyboardType: TextInputType.text,
                   onEditingComplete: () async {
                     if (_formKey.currentState!.validate()) {
-                      _login(emailController.text, passwordController.text);
+                      _login(userName, password);
                     }
                   },
                 ),
@@ -94,7 +99,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                     label: AuthLocalizations.of(context).loginButtonTitle,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _login(emailController.text, passwordController.text);
+                        _login(userName, password);
                       }
                     })
               ]
