@@ -1,6 +1,6 @@
 name: dart_auth
 description: "An auth lib for flutter web and mobile"
-version: 0.0.8
+version: 0.0.9
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
 
   flutter_localizations:
-    sdk: flutter 
+    sdk: flutter
   dio: ^5.7.0
   flutter_secure_storage: ^9.2.2
 

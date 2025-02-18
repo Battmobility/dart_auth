@@ -61,9 +61,12 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                 TextFormField(
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
-                      icon: Icon(_obscurePassword
-                          ? Icons.visibility
-                          : Icons.visibility_off),
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                       onPressed: () {
                         setState(() {
                           _obscurePassword = !_obscurePassword;
