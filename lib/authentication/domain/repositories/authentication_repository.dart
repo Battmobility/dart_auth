@@ -6,4 +6,5 @@ abstract interface class AuthRepository {
   Future<Accesstoken> refreshAccessToken(
       {required Accesstoken token, bool ifNeeded = false});
   Future<Accesstoken> refreshToken({required String refreshToken});
+  Future<bool> registerUser(String email, String password);
 }

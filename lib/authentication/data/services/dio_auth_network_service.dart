@@ -8,13 +8,17 @@ final class DioAuthNetworkService implements AuthNetworkService {
   static const grantTypePassword = 'password';
   static const grantTypeRefresh = 'refresh_token';
 
-  final Dio service;
+  final Dio keycloakService;
+  final Dio battService;
 
-  DioAuthNetworkService({required this.service});
+  DioAuthNetworkService({
+    required this.keycloakService,
+    required this.battService,
+  });
 
   @override
   Future<Accesstoken> getAuthToken(String userName, String password) async {
-    final response = await service.post(
+    final response = await keycloakService.post(
       "/protocol/openid-connect/token",
       data: {
         'client_id': clientId,
@@ -29,7 +33,7 @@ final class DioAuthNetworkService implements AuthNetworkService {
 
   @override
   Future<Accesstoken> refreshAuthToken(String refreshToken) async {
-    final response = await service.post(
+    final response = await keycloakService.post(
       "/protocol/openid-connect/token",
       data: {
         'client_id': clientId,
@@ -39,5 +43,14 @@ final class DioAuthNetworkService implements AuthNetworkService {
       options: Options(contentType: Headers.formUrlEncodedContentType),
     );
     return response.toAccessToken();
+  }
+
+  @override
+  Future<bool> registerUser(String email, String password) async {
+    final response = await battService.post("/user/v1/users", data: {
+      "email": email,
+      "password": password,
+    });
+    return response.statusCode == 204;
   }
 }

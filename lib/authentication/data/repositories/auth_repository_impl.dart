@@ -33,4 +33,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Accesstoken> refreshToken({required String refreshToken}) {
     return authenticationDataSource.refreshToken(refreshToken: refreshToken);
   }
+
+  @override
+  Future<bool> registerUser(String email, String password) {
+    return authenticationDataSource.registerUser(email, password);
+  }
 }
