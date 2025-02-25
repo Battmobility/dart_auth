@@ -67,8 +67,8 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                       onPressed: () {

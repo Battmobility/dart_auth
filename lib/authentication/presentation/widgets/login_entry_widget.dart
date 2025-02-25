@@ -33,7 +33,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: AppPaddings.xlarge.all,
+            padding: AppPaddings.xlarge.all.subtract(AppPaddings.xlarge.bottom),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,8 +66,8 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                       onPressed: () {
