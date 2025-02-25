@@ -130,7 +130,7 @@ abstract class AuthLocalizations {
   /// No description provided for @loginErrorShortPassword.
   ///
   /// In en, this message translates to:
-  /// **'Password must be at least 6 characters long'**
+  /// **'Password must be at least 8 characters long'**
   String get loginErrorShortPassword;
 
   /// No description provided for @loginErrorMessage.

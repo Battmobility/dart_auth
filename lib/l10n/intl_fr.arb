@@ -25,7 +25,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"loginErrorShortPassword": "Password must be at least 6 characters long",
+	"loginErrorShortPassword": "Password must be at least 8 characters long",
 	"@loginErrorShortPassword": {
 		"type": "text",
 		"placeholders": {}

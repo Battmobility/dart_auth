@@ -19,13 +19,13 @@ class AuthLocalizationsNl extends AuthLocalizations {
   String get passwordFieldTitle => 'Wachtwoord';
 
   @override
-  String get loginErrorShortUsername => 'Gebruikersnaam moet minstens zes karakters lang zijn';
+  String get loginErrorShortUsername => 'Gebruikersnaam moet minstens 6 karakters lang zijn';
 
   @override
-  String get loginErrorShortPassword => 'Wachtwoord moet minstens zes karakters lang zijn';
+  String get loginErrorShortPassword => 'Wachtwoord moet minstens 8 karakters lang zijn';
 
   @override
-  String get loginErrorMessage => 'Er ging iets verkeerd bij het afmelden. Gelieve te controleren of je verbinding hebt met internet en probeer daarna opnieuw.';
+  String get loginErrorMessage => 'Er ging iets verkeerd bij het aanmelden. Gelieve te controleren of je verbinding hebt met internet en probeer daarna opnieuw.';
 
   @override
   String get createAccountTitle => 'Word Batt';

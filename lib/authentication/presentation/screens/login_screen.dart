@@ -46,30 +46,34 @@ class _LoginPageState extends State<LoginPage> {
           } else {}
         },
         child: SafeArea(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 500),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: AppPaddings.xlarge.all.add(AppPaddings.large.top),
-                child: Card(
-                  child: Padding(
-                    padding: AppPaddings.medium.vertical,
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        // Log in
-                        Visibility(
-                            visible: activeScreen == AuthScreens.login,
-                            child: _activeWidget()),
-                        // Create account
-                        Visibility(
-                            visible: activeScreen == AuthScreens.register,
-                            child: _activeWidget()),
-                        // Reset password
-                        Visibility(
-                            visible: activeScreen == AuthScreens.forgotPassword,
-                            child: _activeWidget()),
-                      ],
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 500),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: AppPaddings.xlarge.all.add(AppPaddings.large.top),
+                  child: Card(
+                    child: Padding(
+                      padding: AppPaddings.medium.vertical,
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          // Log in
+                          Visibility(
+                              visible: activeScreen == AuthScreens.login,
+                              child: _activeWidget()),
+                          // Create account
+                          Visibility(
+                              visible: activeScreen == AuthScreens.register,
+                              child: _activeWidget()),
+                          // Reset password
+                          Visibility(
+                              visible:
+                                  activeScreen == AuthScreens.forgotPassword,
+                              child: _activeWidget()),
+                        ],
+                      ),
                     ),
                   ),
                 ),

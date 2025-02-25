@@ -22,7 +22,7 @@ class AuthLocalizationsEn extends AuthLocalizations {
   String get loginErrorShortUsername => 'Username must be at least 6 characters long';
 
   @override
-  String get loginErrorShortPassword => 'Password must be at least 6 characters long';
+  String get loginErrorShortPassword => 'Password must be at least 8 characters long';
 
   @override
   String get loginErrorMessage => 'Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.';
