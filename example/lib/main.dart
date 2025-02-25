@@ -71,11 +71,15 @@ class _MyAppState extends State<MyApp> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Logged in!"),
-                        OrangeSolidTextButton(
+                        Padding(
+                          padding: AppPaddings.large.all,
+                          child: OrangeSolidTextButton(
                             label: "Log out",
                             onPressed: () {
                               _logout(context, storage);
-                            })
+                            },
+                          ),
+                        )
                       ],
                     ));
                   } else {

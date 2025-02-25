@@ -45,238 +45,264 @@ class _LoginPageState extends State<LoginPage> {
             return;
           } else {}
         },
-        child: Center(
-          heightFactor: 1.5,
+        child: SafeArea(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 500),
             child: SingleChildScrollView(
               child: Padding(
-                padding: AppPaddings.large.all,
-                child: Stack(
-                  children: [
-                    // Log in
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
+                padding: AppPaddings.xlarge.all.add(AppPaddings.large.top),
+                child: Card(
+                  child: Padding(
+                    padding: AppPaddings.medium.vertical,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: AppPaddings.medium.vertical,
-                              child: Text(
-                                  AuthLocalizations.of(context).loginTitle,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium),
-                            ),
-                            DefaultSimpleTextButton(
-                              label: AuthLocalizations.of(context)
-                                  .createAccountTitle,
-                              buttonSize: BattButtonSize.large,
-                              onPressed: () {
-                                setState(() {
-                                  activeScreen = AuthScreens.register;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                        if (widget.reason != null)
-                          Padding(
-                            padding: AppPaddings.medium.bottom,
-                            child: Text(widget.reason!,
-                                style: Theme.of(context).textTheme.bodyMedium),
+                        // Log in
+                        Visibility(
+                          visible: activeScreen == AuthScreens.login,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: AppPaddings.xlarge.horizontal,
+                                    child: Text(
+                                        AuthLocalizations.of(context)
+                                            .loginTitle,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium),
+                                  ),
+                                  DefaultSimpleTextButton(
+                                    label: AuthLocalizations.of(context)
+                                        .createAccountTitle,
+                                    buttonSize: BattButtonSize.large,
+                                    onPressed: () {
+                                      setState(() {
+                                        activeScreen = AuthScreens.register;
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                              if (widget.reason != null)
+                                Padding(
+                                  padding: AppPaddings.medium.bottom,
+                                  child: Text(widget.reason!,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium),
+                                ),
+                              LoginEntryWidget(
+                                authRepo: authenticationRepository,
+                                onLogin: widget.onLogin,
+                                onException: widget.onException,
+                              ),
+                              DefaultSimpleTextButton(
+                                label: AuthLocalizations.of(context)
+                                    .resetPasswordTitle,
+                                onPressed: () {
+                                  setState(() {
+                                    activeScreen = AuthScreens.forgotPassword;
+                                  });
+                                },
+                              )
+                            ],
                           ),
-                        LoginEntryWidget(
-                          authRepo: authenticationRepository,
-                          onLogin: widget.onLogin,
-                          onException: widget.onException,
                         ),
-                        DefaultSimpleTextButton(
-                          label:
-                              AuthLocalizations.of(context).createAccountTitle,
-                          buttonSize: BattButtonSize.small,
-                          onPressed: () {
-                            setState(() {
-                              activeScreen = AuthScreens.forgotPassword;
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                    // Create account
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8),
-                              child: Text(
-                                  AuthLocalizations.of(context)
-                                      .createAccountTitle,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium),
-                            ),
-                            DefaultSimpleTextButton(
-                              label: AuthLocalizations.of(context).loginTitle,
-                              buttonSize: BattButtonSize.large,
-                              onPressed: () {
-                                setState(() {
-                                  activeScreen = AuthScreens.login;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                        CreateLoginWidget(
-                          authRepo: authenticationRepository,
-                          onCreated: (success, email) {
-                            if (success) {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                      title: Text(AuthLocalizations.of(context)
-                                          .createAccountSuccessMessage(email)),
-                                      actions: [
-                                        OrangeSolidTextButton(
-                                            label: AuthLocalizations.of(context)
-                                                .loginTitle,
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                              setState(() {
-                                                activeScreen =
-                                                    AuthScreens.login;
-                                              });
-                                            })
-                                      ]);
-                                },
-                              );
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                      title: Text(AuthLocalizations.of(context)
-                                          .createAccountFailureMessage),
-                                      actions: [
-                                        OrangeSolidTextButton(
-                                            label: AuthLocalizations.of(context)
-                                                .loginTitle,
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            })
-                                      ]);
-                                },
-                              );
-                            }
-                          },
-                          onException: (e) => {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              BattSnackbar.error(
-                                title: AuthLocalizations.of(context)
-                                    .createAccountFailureMessage,
-                                message: e.toString(),
-                              ).build(context),
-                            )
-                          },
-                        ),
-                      ],
-                    ),
-                    // Reset password
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: AppPaddings.medium.vertical,
-                              child: Text(
-                                  AuthLocalizations.of(context)
-                                      .resetPasswordTitle,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium),
-                            ),
-                            DefaultSimpleTextButton(
-                              label: AuthLocalizations.of(context).loginTitle,
-                              buttonSize: BattButtonSize.large,
-                              onPressed: () {
-                                setState(() {
-                                  activeScreen = AuthScreens.login;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                        PasswordResetWidget(
-                          authRepo: authenticationRepository,
-                          onReset: (success, email) => {
-                            if (success)
-                              {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                        title: Text(
-                                            AuthLocalizations.of(context)
-                                                .resetPasswordSuccessMessage(
+                        // Create account
+                        Visibility(
+                          visible: activeScreen == AuthScreens.register,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: AppPaddings.xlarge.horizontal,
+                                    child: Text(
+                                        AuthLocalizations.of(context)
+                                            .createAccountTitle,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium),
+                                  ),
+                                  DefaultSimpleTextButton(
+                                    label: AuthLocalizations.of(context)
+                                        .loginTitle,
+                                    buttonSize: BattButtonSize.large,
+                                    onPressed: () {
+                                      setState(() {
+                                        activeScreen = AuthScreens.login;
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                              CreateLoginWidget(
+                                authRepo: authenticationRepository,
+                                onCreated: (success, email) {
+                                  if (success) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                            title: Text(AuthLocalizations.of(
+                                                    context)
+                                                .createAccountSuccessMessage(
                                                     email)),
-                                        actions: [
-                                          OrangeSolidTextButton(
-                                              label:
-                                                  AuthLocalizations.of(context)
+                                            actions: [
+                                              OrangeSolidTextButton(
+                                                  label: AuthLocalizations.of(
+                                                          context)
                                                       .loginTitle,
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                                setState(() {
-                                                  activeScreen =
-                                                      AuthScreens.login;
-                                                });
-                                              })
-                                        ]);
-                                  },
-                                )
-                              }
-                            else
-                              {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                        title: Text(
-                                            AuthLocalizations.of(context)
-                                                .resetPasswordFailureMessage),
-                                        actions: [
-                                          OrangeSolidTextButton(
-                                              label:
-                                                  AuthLocalizations.of(context)
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    setState(() {
+                                                      activeScreen =
+                                                          AuthScreens.login;
+                                                    });
+                                                  })
+                                            ]);
+                                      },
+                                    );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                            title: Text(AuthLocalizations.of(
+                                                    context)
+                                                .createAccountFailureMessage),
+                                            actions: [
+                                              OrangeSolidTextButton(
+                                                  label: AuthLocalizations.of(
+                                                          context)
                                                       .loginTitle,
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              })
-                                        ]);
-                                  },
-                                )
-                              }
-                          },
-                          onException: (e) => {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              BattSnackbar.error(
-                                title: AuthLocalizations.of(context)
-                                    .createAccountFailureMessage,
-                                message: e.toString(),
-                              ).build(context),
-                            )
-                          }, // TODO: show dialog,
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  })
+                                            ]);
+                                      },
+                                    );
+                                  }
+                                },
+                                onException: (e) => {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    BattSnackbar.error(
+                                      title: AuthLocalizations.of(context)
+                                          .createAccountFailureMessage,
+                                      message: e.toString(),
+                                    ).build(context),
+                                  )
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Reset password
+                        Visibility(
+                          visible: activeScreen == AuthScreens.forgotPassword,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: AppPaddings.xlarge.horizontal,
+                                    child: Text(
+                                        AuthLocalizations.of(context)
+                                            .resetPasswordTitle,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium),
+                                  ),
+                                  DefaultSimpleTextButton(
+                                    label: AuthLocalizations.of(context)
+                                        .loginTitle,
+                                    buttonSize: BattButtonSize.large,
+                                    onPressed: () {
+                                      setState(() {
+                                        activeScreen = AuthScreens.login;
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                              PasswordResetWidget(
+                                authRepo: authenticationRepository,
+                                onReset: (success, email) => {
+                                  if (success)
+                                    {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                              title: Text(AuthLocalizations.of(
+                                                      context)
+                                                  .resetPasswordSuccessMessage(
+                                                      email)),
+                                              actions: [
+                                                OrangeSolidTextButton(
+                                                    label: AuthLocalizations.of(
+                                                            context)
+                                                        .loginTitle,
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                      setState(() {
+                                                        activeScreen =
+                                                            AuthScreens.login;
+                                                      });
+                                                    })
+                                              ]);
+                                        },
+                                      )
+                                    }
+                                  else
+                                    {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                              title: Text(AuthLocalizations.of(
+                                                      context)
+                                                  .resetPasswordFailureMessage),
+                                              actions: [
+                                                OrangeSolidTextButton(
+                                                    label: AuthLocalizations.of(
+                                                            context)
+                                                        .loginTitle,
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    })
+                                              ]);
+                                        },
+                                      )
+                                    }
+                                },
+                                onException: (e) => {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    BattSnackbar.error(
+                                      title: AuthLocalizations.of(context)
+                                          .createAccountFailureMessage,
+                                      message: e.toString(),
+                                    ).build(context),
+                                  )
+                                }, // TODO: show dialog,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

@@ -34,12 +34,15 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(22),
+            padding: AppPaddings.xlarge.all,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
+                  decoration: InputDecoration(
+                    labelText: AuthLocalizations.of(context).emailFieldTitle,
+                  ),
                   autofillHints: const [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
@@ -60,6 +63,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
+                    labelText: AuthLocalizations.of(context).passwordFieldTitle,
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword
@@ -81,7 +85,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                       return AuthLocalizations.of(context)
                           .loginErrorShortPassword;
                     }
-                    if (value.length < 6) {
+                    if (value.length < 8) {
                       return AuthLocalizations.of(context)
                           .loginErrorShortPassword;
                     } else {
@@ -89,7 +93,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                     }
                   },
                   obscureText: _obscurePassword,
-                  autofillHints: const [AutofillHints.password],
+                  autofillHints: const [AutofillHints.newPassword],
                   keyboardType: TextInputType.text,
                   onEditingComplete: () async {
                     if (_formKey.currentState!.validate()) {
@@ -98,7 +102,8 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                   },
                 ),
                 OrangeSolidTextButton(
-                    label: AuthLocalizations.of(context).loginButtonTitle,
+                    label:
+                        AuthLocalizations.of(context).createAccountButtonTitle,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _createLogin(userName, password);
@@ -106,7 +111,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                     })
               ]
                   .map((e) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
+                        padding: AppPaddings.small.vertical,
                         child: e,
                       ))
                   .toList(),

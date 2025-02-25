@@ -35,12 +35,15 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(22),
+            padding: AppPaddings.xlarge.all,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
+                  decoration: InputDecoration(
+                    labelText: AuthLocalizations.of(context).passwordFieldTitle,
+                  ),
                   autofillHints: const [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
@@ -75,7 +78,7 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
                     })
               ]
                   .map((e) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
+                        padding: AppPaddings.xlarge.vertical,
                         child: e,
                       ))
                   .toList(),

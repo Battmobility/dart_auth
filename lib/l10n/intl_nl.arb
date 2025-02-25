@@ -10,6 +10,16 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"emailFieldTitle": "E-mail",
+	"@emailFieldTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordFieldTitle": "Wachtwoord",
+	"@passwordFieldTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginErrorShortUsername": "Gebruikersnaam moet minstens zes karakters lang zijn",
 	"@loginErrorShortUsername": {
 		"type": "text",
@@ -27,6 +37,11 @@
 	},
 	"createAccountTitle": "Word Batt",
 	"@createAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountButtonTitle": "Maak account",
+	"@createAccountButtonTitle": {
 		"type": "text",
 		"placeholders": {}
 	},

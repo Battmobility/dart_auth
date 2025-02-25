@@ -10,6 +10,16 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"emailFieldTitle": "Email",
+	"@emailFieldTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordFieldTitle": "Password",
+	"@passwordFieldTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginErrorShortUsername": "Username must be at least 6 characters long",
 	"@loginErrorShortUsername": {
 		"type": "text",
@@ -27,6 +37,11 @@
 	},
 	"createAccountTitle": "Create account",
 	"@createAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountButtonTitle": "Create",
+	"@createAccountButtonTitle": {
 		"type": "text",
 		"placeholders": {}
 	},

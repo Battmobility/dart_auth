@@ -109,6 +109,18 @@ abstract class AuthLocalizations {
   /// **'Log in'**
   String get loginButtonTitle;
 
+  /// No description provided for @emailFieldTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailFieldTitle;
+
+  /// No description provided for @passwordFieldTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordFieldTitle;
+
   /// No description provided for @loginErrorShortUsername.
   ///
   /// In en, this message translates to:
@@ -132,6 +144,12 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Create account'**
   String get createAccountTitle;
+
+  /// No description provided for @createAccountButtonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get createAccountButtonTitle;
 
   /// No description provided for @createAccountSuccessMessage.
   ///

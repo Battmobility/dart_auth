@@ -13,6 +13,12 @@ class AuthLocalizationsFr extends AuthLocalizations {
   String get loginButtonTitle => 'Log in';
 
   @override
+  String get emailFieldTitle => 'E-mail';
+
+  @override
+  String get passwordFieldTitle => 'Wachtwoord';
+
+  @override
   String get loginErrorShortUsername => 'Username must be at least 6 characters long';
 
   @override
@@ -23,6 +29,9 @@ class AuthLocalizationsFr extends AuthLocalizations {
 
   @override
   String get createAccountTitle => 'Create account';
+
+  @override
+  String get createAccountButtonTitle => 'Create';
 
   @override
   String createAccountSuccessMessage(Object email) {

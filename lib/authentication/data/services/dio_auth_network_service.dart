@@ -59,6 +59,6 @@ final class DioAuthNetworkService implements AuthNetworkService {
     final response = await battService.post("/user/v1/password-resets", data: {
       "email": email,
     });
-    return response.statusCode == 200;
+    return response.statusCode == 204;
   }
 }

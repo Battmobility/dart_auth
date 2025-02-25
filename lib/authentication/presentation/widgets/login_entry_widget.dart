@@ -1,4 +1,4 @@
-import 'package:batt_ds/molecules/buttons/buttons.dart';
+import 'package:batt_ds/batt_ds.dart';
 import 'package:dart_auth/authentication/domain/domain.dart';
 import 'package:dart_auth/l10n/auth_localizations.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +33,15 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(22),
+            padding: AppPaddings.xlarge.all,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
-                  //controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: AuthLocalizations.of(context).emailFieldTitle,
+                  ),
                   autofillHints: const [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
@@ -60,6 +62,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
+                    labelText: AuthLocalizations.of(context).passwordFieldTitle,
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword
@@ -81,14 +84,13 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                       return AuthLocalizations.of(context)
                           .loginErrorShortPassword;
                     }
-                    if (value.length < 6) {
+                    if (value.length < 8) {
                       return AuthLocalizations.of(context)
                           .loginErrorShortPassword;
                     } else {
                       return null;
                     }
                   },
-                  //controller: passwordController,
                   obscureText: _obscurePassword,
                   autofillHints: const [AutofillHints.password],
                   keyboardType: TextInputType.text,
@@ -107,7 +109,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                     })
               ]
                   .map((e) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
+                        padding: AppPaddings.small.vertical,
                         child: e,
                       ))
                   .toList(),
