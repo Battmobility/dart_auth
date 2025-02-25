@@ -126,6 +126,24 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.'**
   String get loginErrorMessage;
+
+  /// No description provided for @createAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get createAccountTitle;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the email address associated with your account to reset the password.'**
+  String get resetPasswordLabel;
 }
 
 class _AuthLocalizationsDelegate extends LocalizationsDelegate<AuthLocalizations> {

@@ -7,6 +7,7 @@ abstract interface class AuthenticationDataSource {
       {required String userName, required String password});
   Future<Accesstoken> refreshToken({required String refreshToken});
   Future<bool> registerUser(String email, String password);
+  Future<bool> resetPassword(String email);
 }
 
 class RemoteAuthenticationDataSource implements AuthenticationDataSource {
@@ -28,5 +29,10 @@ class RemoteAuthenticationDataSource implements AuthenticationDataSource {
   @override
   Future<bool> registerUser(String email, String password) async {
     return await networkService.registerUser(email, password);
+  }
+
+  @override
+  Future<bool> resetPassword(String email) async {
+    return await networkService.resetPassword(email);
   }
 }

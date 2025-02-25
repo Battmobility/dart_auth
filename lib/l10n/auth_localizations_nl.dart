@@ -20,4 +20,13 @@ class AuthLocalizationsNl extends AuthLocalizations {
 
   @override
   String get loginErrorMessage => 'Er ging iets verkeerd bij het afmelden. Gelieve te controleren of je verbinding hebt met internet en probeer daarna opnieuw.';
+
+  @override
+  String get createAccountTitle => 'Word Batt';
+
+  @override
+  String get resetPasswordTitle => 'Stel wachtwoord opnieuw in';
+
+  @override
+  String get resetPasswordLabel => 'Voer het emailadres van je account in om je wachtwoord opnieuw in te stellen.';
 }

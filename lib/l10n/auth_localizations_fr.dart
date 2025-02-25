@@ -20,4 +20,13 @@ class AuthLocalizationsFr extends AuthLocalizations {
 
   @override
   String get loginErrorMessage => 'Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.';
+
+  @override
+  String get createAccountTitle => 'Create account';
+
+  @override
+  String get resetPasswordTitle => 'Reset password';
+
+  @override
+  String get resetPasswordLabel => 'Enter the email address associated with your account to reset the password.';
 }

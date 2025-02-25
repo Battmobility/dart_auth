@@ -59,3 +59,15 @@ Future<Accesstoken> refreshAccessToken(
 Future<Accesstoken?> refreshToken(String refreshToken) async {
   return authenticationRepository.refreshToken(refreshToken: refreshToken);
 }
+
+Future<bool> registerUser(
+    {required String email, required String password}) async {
+  return await authenticationRepository.registerUser(
+    email: email,
+    password: password,
+  );
+}
+
+Future<bool> resetPassword(String email) async {
+  return authenticationRepository.resetPassword(email: email);
+}

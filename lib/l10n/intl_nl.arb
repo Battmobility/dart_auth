@@ -24,5 +24,20 @@
 	"@loginErrorMessage": {
 		"type": "text",
 		"placeholders": {}
-	}
+	},
+	"createAccountTitle": "Word Batt",
+	"@createAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resetPasswordTitle": "Stel wachtwoord opnieuw in",
+	"@resetPasswordTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resetPasswordLabel": "Voer het emailadres van je account in om je wachtwoord opnieuw in te stellen.",
+	"@resetPasswordLabel": {
+		"type": "text",
+		"placeholders": {}
+	}	
 }

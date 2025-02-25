@@ -53,4 +53,12 @@ final class DioAuthNetworkService implements AuthNetworkService {
     });
     return response.statusCode == 204;
   }
+
+  @override
+  Future<bool> resetPassword(String email) async {
+    final response = await battService.post("/user/v1/password-resets", data: {
+      "email": email,
+    });
+    return response.statusCode == 200;
+  }
 }

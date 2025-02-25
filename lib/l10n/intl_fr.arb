@@ -24,5 +24,20 @@
 	"@loginErrorMessage": {
 		"type": "text",
 		"placeholders": {}
-	}
+	},
+	"createAccountTitle": "Create account",
+	"@createAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resetPasswordTitle": "Reset password",
+	"@resetPasswordTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resetPasswordLabel": "Enter the email address associated with your account to reset the password.",
+	"@resetPasswordLabel": {
+		"type": "text",
+		"placeholders": {}
+	}	
 }
