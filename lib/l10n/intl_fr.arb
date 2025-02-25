@@ -30,6 +30,16 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"createAccountSuccessMessage": "A link to verify your email address was sent to {email}.",
+	"@createAccountSuccessMessage": {
+		"type": "text",
+		"placeholders": {"email": {}}
+	},
+	"createAccountFailureMessage": "Sorry, there was an error creating your account. If the problem persists, please contact support.",
+	"@createAccountFailureMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"resetPasswordTitle": "Reset password",
 	"@resetPasswordTitle": {
 		"type": "text",
@@ -39,5 +49,20 @@
 	"@resetPasswordLabel": {
 		"type": "text",
 		"placeholders": {}
-	}	
+	},
+	"resetPasswordButtonTitle": "Reset",
+	"@resetPasswordButtonTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resetPasswordSuccessMessage": "A link to reset the password was sent to {email}.",
+	"@resetPasswordSuccessMessage": {
+		"type": "text",
+		"placeholders": {"email": {}}
+	},
+	"resetPasswordFailureMessage": "Sorry, there was an error resetting your password. If the problem persists, please contact support.",
+	"@resetPasswordFailureMessage": {
+		"type": "text",
+		"placeholders": {}
+	}
 }

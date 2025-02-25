@@ -30,6 +30,16 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"createAccountSuccessMessage": "Er werd een link om het emailadres te bevestigen verstuurd naar {email}.",
+	"@createAccountSuccessMessage": {
+		"type": "text",
+		"placeholders": {"email": {}}
+	},
+	"createAccountFailureMessage": "Sorry, er was een probleem bij het aanmaken van een account. Probeer later nogmaals of neem contact op met onze klantendienst.",
+	"@createAccountFailureMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"resetPasswordTitle": "Stel wachtwoord opnieuw in",
 	"@resetPasswordTitle": {
 		"type": "text",
@@ -39,5 +49,20 @@
 	"@resetPasswordLabel": {
 		"type": "text",
 		"placeholders": {}
-	}	
+	},	
+	"resetPasswordButtonTitle": "Stel opnieuw in",
+	"@resetPasswordButtonTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resetPasswordSuccessMessage": "Er werd een link om het wachtwoord opnieuw in te stellen verstuurd naar {email}.",
+	"@resetPasswordSuccessMessage": {
+		"type": "text",
+		"placeholders": {"email": {}}
+	},
+	"resetPasswordFailureMessage": "Sorry, er was een probleem bij het opnieuw instellen. Probeer later nogmaals of neem contact op met onze klantendienst.",
+	"@resetPasswordFailureMessage": {
+		"type": "text",
+		"placeholders": {}
+	}
 }

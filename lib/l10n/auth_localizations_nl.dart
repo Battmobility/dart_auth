@@ -25,8 +25,27 @@ class AuthLocalizationsNl extends AuthLocalizations {
   String get createAccountTitle => 'Word Batt';
 
   @override
+  String createAccountSuccessMessage(Object email) {
+    return 'Er werd een link om het emailadres te bevestigen verstuurd naar $email.';
+  }
+
+  @override
+  String get createAccountFailureMessage => 'Sorry, er was een probleem bij het aanmaken van een account. Probeer later nogmaals of neem contact op met onze klantendienst.';
+
+  @override
   String get resetPasswordTitle => 'Stel wachtwoord opnieuw in';
 
   @override
   String get resetPasswordLabel => 'Voer het emailadres van je account in om je wachtwoord opnieuw in te stellen.';
+
+  @override
+  String get resetPasswordButtonTitle => 'Stel opnieuw in';
+
+  @override
+  String resetPasswordSuccessMessage(Object email) {
+    return 'Er werd een link om het wachtwoord opnieuw in te stellen verstuurd naar $email.';
+  }
+
+  @override
+  String get resetPasswordFailureMessage => 'Sorry, er was een probleem bij het opnieuw instellen. Probeer later nogmaals of neem contact op met onze klantendienst.';
 }

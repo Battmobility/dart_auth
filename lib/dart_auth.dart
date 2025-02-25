@@ -14,11 +14,11 @@ Future<void> login(
           await authenticationRepository.refreshAccessToken(token: accessToken);
       onLogin(refreshedToken);
     } catch (e) {
-      await _getNewToken(
+      await _showLoginDialog(
           context: context, onLogin: onLogin, onException: onException);
     }
   } else {
-    await _getNewToken(
+    await _showLoginDialog(
         context: context, onLogin: onLogin, onException: onException);
   }
 }
@@ -37,18 +37,34 @@ Future<void> loginUser(
   }
 }
 
-Future<void> _getNewToken(
+Future<void> _showLoginDialog(
     {required BuildContext context,
     required Function(Accesstoken) onLogin,
     required Function(Object) onException}) async {
   showDialog(
-      context: context,
-      builder: (_) {
-        return LoginPage(
-          onLogin: onLogin,
-          onException: onException,
-        );
-      });
+    context: context,
+    builder: (_) {
+      return LoginPage(
+        onLogin: onLogin,
+        onException: onException,
+      );
+    },
+  );
+}
+
+Future<void> showRegistrationDialog(
+    {required BuildContext context,
+    required Function(Accesstoken) onLogin,
+    required Function(Object) onException}) async {
+  showDialog(
+    context: context,
+    builder: (_) {
+      return LoginPage(
+        onLogin: onLogin,
+        onException: onException,
+      );
+    },
+  );
 }
 
 Future<Accesstoken> refreshAccessToken(
@@ -71,3 +87,5 @@ Future<bool> registerUser(
 Future<bool> resetPassword(String email) async {
   return authenticationRepository.resetPassword(email: email);
 }
+
+enum AuthScreens { login, register, forgotPassword }

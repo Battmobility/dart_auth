@@ -25,8 +25,27 @@ class AuthLocalizationsEn extends AuthLocalizations {
   String get createAccountTitle => 'Create account';
 
   @override
+  String createAccountSuccessMessage(Object email) {
+    return 'A link to verify your email address was sent to $email.';
+  }
+
+  @override
+  String get createAccountFailureMessage => 'Sorry, there was an error creating your account. If the problem persists, please contact support.';
+
+  @override
   String get resetPasswordTitle => 'Reset password';
 
   @override
   String get resetPasswordLabel => 'Enter the email address associated with your account to reset the password.';
+
+  @override
+  String get resetPasswordButtonTitle => 'Reset';
+
+  @override
+  String resetPasswordSuccessMessage(Object email) {
+    return 'A link to reset the password was sent to $email.';
+  }
+
+  @override
+  String get resetPasswordFailureMessage => 'Sorry, there was an error resetting your password. If the problem persists, please contact support.';
 }

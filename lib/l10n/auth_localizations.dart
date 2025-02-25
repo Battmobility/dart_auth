@@ -133,6 +133,18 @@ abstract class AuthLocalizations {
   /// **'Create account'**
   String get createAccountTitle;
 
+  /// No description provided for @createAccountSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'A link to verify your email address was sent to {email}.'**
+  String createAccountSuccessMessage(Object email);
+
+  /// No description provided for @createAccountFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, there was an error creating your account. If the problem persists, please contact support.'**
+  String get createAccountFailureMessage;
+
   /// No description provided for @resetPasswordTitle.
   ///
   /// In en, this message translates to:
@@ -144,6 +156,24 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Enter the email address associated with your account to reset the password.'**
   String get resetPasswordLabel;
+
+  /// No description provided for @resetPasswordButtonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetPasswordButtonTitle;
+
+  /// No description provided for @resetPasswordSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'A link to reset the password was sent to {email}.'**
+  String resetPasswordSuccessMessage(Object email);
+
+  /// No description provided for @resetPasswordFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, there was an error resetting your password. If the problem persists, please contact support.'**
+  String get resetPasswordFailureMessage;
 }
 
 class _AuthLocalizationsDelegate extends LocalizationsDelegate<AuthLocalizations> {
