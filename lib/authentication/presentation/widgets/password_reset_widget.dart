@@ -42,7 +42,7 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: AuthLocalizations.of(context).passwordFieldTitle,
+                    labelText: AuthLocalizations.of(context).emailFieldTitle,
                   ),
                   autofillHints: const [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dart_auth/l10n/auth_localizations.dart';
 
 final class CreateLoginWidget extends StatefulWidget {
-  final Function(bool, String) onCreated;
+  final Function(bool, String, String) onCreated;
   final Function(Object) onException;
   final AuthRepository authRepo;
 
@@ -126,7 +126,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
     try {
       final success =
           await widget.authRepo.registerUser(email: email, password: password);
-      widget.onCreated(success, email);
+      widget.onCreated(success, email, password);
     } catch (e, _) {
       widget.onException(e);
     }

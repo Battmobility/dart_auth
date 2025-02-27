@@ -7,12 +7,17 @@ class LoginEntryWidget extends StatefulWidget {
   final AuthRepository authRepo;
   final Function(Accesstoken) onLogin;
   final Function(Object) onException;
+  final String? email;
+  final String? password;
 
-  const LoginEntryWidget(
-      {super.key,
-      required this.authRepo,
-      required this.onLogin,
-      required this.onException});
+  const LoginEntryWidget({
+    super.key,
+    required this.authRepo,
+    required this.onLogin,
+    required this.onException,
+    this.email,
+    this.password,
+  });
 
   @override
   State<LoginEntryWidget> createState() => _LoginEntryWidgetState();
@@ -21,6 +26,17 @@ class LoginEntryWidget extends StatefulWidget {
 class _LoginEntryWidgetState extends State<LoginEntryWidget> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.email != null && widget.password != null) {
+      setState(() {
+        userName = widget.email!;
+        password = widget.password!;
+      });
+    }
+  }
 
   String userName = "";
   String password = "";

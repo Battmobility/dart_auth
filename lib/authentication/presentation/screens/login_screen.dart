@@ -29,6 +29,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late AuthScreens activeScreen;
 
+  String? email;
+  String? password;
+
   @override
   void initState() {
     super.initState();
@@ -55,26 +58,8 @@ class _LoginPageState extends State<LoginPage> {
                   padding: AppPaddings.xlarge.all.add(AppPaddings.large.top),
                   child: Card(
                     child: Padding(
-                      padding: AppPaddings.medium.vertical,
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: [
-                          // Log in
-                          Visibility(
-                              visible: activeScreen == AuthScreens.login,
-                              child: _activeWidget()),
-                          // Create account
-                          Visibility(
-                              visible: activeScreen == AuthScreens.register,
-                              child: _activeWidget()),
-                          // Reset password
-                          Visibility(
-                              visible:
-                                  activeScreen == AuthScreens.forgotPassword,
-                              child: _activeWidget()),
-                        ],
-                      ),
-                    ),
+                        padding: AppPaddings.medium.vertical,
+                        child: _activeWidget()),
                   ),
                 ),
               ),
@@ -95,19 +80,26 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: AppPaddings.xlarge.horizontal,
-                  child: Text(AuthLocalizations.of(context).loginTitle,
-                      style: Theme.of(context).textTheme.headlineMedium),
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: AppPaddings.xlarge.horizontal,
+                    child: Text(AuthLocalizations.of(context).loginTitle,
+                        maxLines: 3,
+                        style: Theme.of(context).textTheme.headlineMedium),
+                  ),
                 ),
-                DefaultSimpleTextButton(
-                  label: AuthLocalizations.of(context).createAccountTitle,
-                  buttonSize: BattButtonSize.large,
-                  onPressed: () {
-                    setState(() {
-                      activeScreen = AuthScreens.register;
-                    });
-                  },
+                Flexible(
+                  flex: 1,
+                  child: DefaultSimpleTextButton(
+                    label: AuthLocalizations.of(context).createAccountTitle,
+                    buttonSize: BattButtonSize.large,
+                    onPressed: () {
+                      setState(() {
+                        activeScreen = AuthScreens.register;
+                      });
+                    },
+                  ),
                 )
               ],
             ),
@@ -121,6 +113,8 @@ class _LoginPageState extends State<LoginPage> {
               authRepo: authenticationRepository,
               onLogin: widget.onLogin,
               onException: widget.onException,
+              email: email,
+              password: password,
             ),
             DefaultSimpleTextButton(
               label: AuthLocalizations.of(context).resetPasswordTitle,
@@ -140,19 +134,27 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: AppPaddings.xlarge.horizontal,
-                  child: Text(AuthLocalizations.of(context).resetPasswordTitle,
-                      style: Theme.of(context).textTheme.headlineMedium),
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: AppPaddings.xlarge.horizontal,
+                    child: Text(
+                        AuthLocalizations.of(context).resetPasswordTitle,
+                        maxLines: 3,
+                        style: Theme.of(context).textTheme.headlineMedium),
+                  ),
                 ),
-                DefaultSimpleTextButton(
-                  label: AuthLocalizations.of(context).loginTitle,
-                  buttonSize: BattButtonSize.large,
-                  onPressed: () {
-                    setState(() {
-                      activeScreen = AuthScreens.login;
-                    });
-                  },
+                Flexible(
+                  flex: 1,
+                  child: DefaultSimpleTextButton(
+                    label: AuthLocalizations.of(context).loginTitle,
+                    buttonSize: BattButtonSize.large,
+                    onPressed: () {
+                      setState(() {
+                        activeScreen = AuthScreens.login;
+                      });
+                    },
+                  ),
                 )
               ],
             ),
@@ -221,26 +223,36 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: AppPaddings.xlarge.horizontal,
-                  child: Text(AuthLocalizations.of(context).createAccountTitle,
-                      style: Theme.of(context).textTheme.headlineMedium),
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: AppPaddings.xlarge.horizontal,
+                    child: Text(
+                        AuthLocalizations.of(context).createAccountTitle,
+                        maxLines: 3,
+                        style: Theme.of(context).textTheme.headlineMedium),
+                  ),
                 ),
-                DefaultSimpleTextButton(
-                  label: AuthLocalizations.of(context).loginTitle,
-                  buttonSize: BattButtonSize.large,
-                  onPressed: () {
-                    setState(() {
-                      activeScreen = AuthScreens.login;
-                    });
-                  },
+                Flexible(
+                  flex: 1,
+                  child: DefaultSimpleTextButton(
+                    label: AuthLocalizations.of(context).loginTitle,
+                    buttonSize: BattButtonSize.large,
+                    onPressed: () {
+                      setState(() {
+                        activeScreen = AuthScreens.login;
+                      });
+                    },
+                  ),
                 )
               ],
             ),
             CreateLoginWidget(
               authRepo: authenticationRepository,
-              onCreated: (success, email) {
+              onCreated: (success, email, password) {
                 if (success) {
+                  this.email = email;
+                  this.password = password;
                   showDialog(
                     context: context,
                     builder: (context) {
