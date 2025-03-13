@@ -45,10 +45,17 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"choosePasswordFieldTitle": "Choose password",
+	"@choosePasswordFieldTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"createAccountSuccessMessage": "A link to verify your email address was sent to {email}.",
 	"@createAccountSuccessMessage": {
 		"type": "text",
-		"placeholders": {"email": {}}
+		"placeholders": {"email": {
+			"type": "Object"
+		}}
 	},
 	"createAccountFailureMessage": "Sorry, there was an error creating your account. If the problem persists, please contact support.",
 	"@createAccountFailureMessage": {
@@ -73,7 +80,10 @@
 	"resetPasswordSuccessMessage": "A link to reset the password was sent to {email}.",
 	"@resetPasswordSuccessMessage": {
 		"type": "text",
-		"placeholders": {"email": {}}
+		"placeholders": {"email": {
+			"type": "Object"
+			}
+		}
 	},
 	"resetPasswordFailureMessage": "Sorry, there was an error resetting your password. If the problem persists, please contact support.",
 	"@resetPasswordFailureMessage": {

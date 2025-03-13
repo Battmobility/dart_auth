@@ -45,10 +45,17 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"choosePasswordFieldTitle": "Kies wachtwoord",
+	"@choosePasswordFieldTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"createAccountSuccessMessage": "Er werd een link om het emailadres te bevestigen verstuurd naar {email}.",
 	"@createAccountSuccessMessage": {
 		"type": "text",
-		"placeholders": {"email": {}}
+		"placeholders": {"email": {
+			"type": "Object"
+		}}
 	},
 	"createAccountFailureMessage": "Sorry, er was een probleem bij het aanmaken van een account. Probeer later nogmaals of neem contact op met onze klantendienst.",
 	"@createAccountFailureMessage": {
@@ -73,7 +80,9 @@
 	"resetPasswordSuccessMessage": "Er werd een link om het wachtwoord opnieuw in te stellen verstuurd naar {email}.",
 	"@resetPasswordSuccessMessage": {
 		"type": "text",
-		"placeholders": {"email": {}}
+		"placeholders": {"email": {
+			"type": "Object"
+		}}
 	},
 	"resetPasswordFailureMessage": "Sorry, er was een probleem bij het opnieuw instellen. Probeer later nogmaals of neem contact op met onze klantendienst.",
 	"@resetPasswordFailureMessage": {

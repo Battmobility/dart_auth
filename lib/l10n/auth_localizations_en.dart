@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'auth_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -32,6 +34,9 @@ class AuthLocalizationsEn extends AuthLocalizations {
 
   @override
   String get createAccountButtonTitle => 'Create';
+
+  @override
+  String get choosePasswordFieldTitle => 'Choose password';
 
   @override
   String createAccountSuccessMessage(Object email) {

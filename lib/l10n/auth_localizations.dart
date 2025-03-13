@@ -151,6 +151,12 @@ abstract class AuthLocalizations {
   /// **'Create'**
   String get createAccountButtonTitle;
 
+  /// No description provided for @choosePasswordFieldTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose password'**
+  String get choosePasswordFieldTitle;
+
   /// No description provided for @createAccountSuccessMessage.
   ///
   /// In en, this message translates to:

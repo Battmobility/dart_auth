@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: PopScope(
         canPop: true,
         onPopInvokedWithResult: (didPop, _) {
@@ -89,16 +90,19 @@ class _LoginPageState extends State<LoginPage> {
                         style: Theme.of(context).textTheme.headlineMedium),
                   ),
                 ),
-                Flexible(
-                  flex: 1,
-                  child: DefaultSimpleTextButton(
-                    label: AuthLocalizations.of(context).createAccountTitle,
-                    buttonSize: BattButtonSize.large,
-                    onPressed: () {
-                      setState(() {
-                        activeScreen = AuthScreens.register;
-                      });
-                    },
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Flexible(
+                    flex: 1,
+                    child: DefaultSimpleTextButton(
+                      label: AuthLocalizations.of(context).createAccountTitle,
+                      buttonSize: BattButtonSize.large,
+                      onPressed: () {
+                        setState(() {
+                          activeScreen = AuthScreens.register;
+                        });
+                      },
+                    ),
                   ),
                 )
               ],
@@ -146,14 +150,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Flexible(
                   flex: 1,
-                  child: DefaultSimpleTextButton(
-                    label: AuthLocalizations.of(context).loginTitle,
-                    buttonSize: BattButtonSize.large,
-                    onPressed: () {
-                      setState(() {
-                        activeScreen = AuthScreens.login;
-                      });
-                    },
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: DefaultSimpleTextButton(
+                      label: AuthLocalizations.of(context).loginTitle,
+                      buttonSize: BattButtonSize.large,
+                      onPressed: () {
+                        setState(() {
+                          activeScreen = AuthScreens.login;
+                        });
+                      },
+                    ),
                   ),
                 )
               ],
@@ -235,14 +242,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Flexible(
                   flex: 1,
-                  child: DefaultSimpleTextButton(
-                    label: AuthLocalizations.of(context).loginTitle,
-                    buttonSize: BattButtonSize.large,
-                    onPressed: () {
-                      setState(() {
-                        activeScreen = AuthScreens.login;
-                      });
-                    },
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: DefaultSimpleTextButton(
+                      label: AuthLocalizations.of(context).loginTitle,
+                      buttonSize: BattButtonSize.large,
+                      onPressed: () {
+                        setState(() {
+                          activeScreen = AuthScreens.login;
+                        });
+                      },
+                    ),
                   ),
                 )
               ],

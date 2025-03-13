@@ -63,7 +63,8 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: AuthLocalizations.of(context).passwordFieldTitle,
+                    labelText:
+                        AuthLocalizations.of(context).choosePasswordFieldTitle,
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword
