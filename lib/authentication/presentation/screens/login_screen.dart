@@ -90,10 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                         style: Theme.of(context).textTheme.headlineMedium),
                   ),
                 ),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Flexible(
-                    flex: 1,
+                Flexible(
+                  flex: 1,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: DefaultSimpleTextButton(
                       label: AuthLocalizations.of(context).createAccountTitle,
                       buttonSize: BattButtonSize.large,

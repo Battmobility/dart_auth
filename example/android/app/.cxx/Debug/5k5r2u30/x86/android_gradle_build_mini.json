@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/kris/Flutter/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/kris/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/kris/iOS/Batt/dart_auth/example/android/app/.cxx/Debug/5k5r2u30/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/kris/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/kris/iOS/Batt/dart_auth/example/android/app/.cxx/Debug/5k5r2u30/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
