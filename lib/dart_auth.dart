@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'authentication/presentation/screens/login_screen.dart';
 
-void init(String? keycloakUrl, String? battMobilityUrl) {
-  keycloakUrl = keycloakUrl;
-  battMobilityUrl = battMobilityUrl;
+final class BattAuth {
+  static void init(String? keycloakUrl, String? battMobilityUrl) {
+    keycloakUrl = keycloakUrl;
+    battMobilityUrl = battMobilityUrl;
+  }
 }
 
 Future<void> login(
