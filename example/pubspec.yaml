@@ -45,7 +45,7 @@ dependencies:
       url: https://github.com/Battmobility/be.battmobility.batt_ds.git
       ref: 'main'
 
-  dart_auth:
+  batt_auth:
     path: ../
 
 dev_dependencies:

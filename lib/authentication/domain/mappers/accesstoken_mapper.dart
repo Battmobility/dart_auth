@@ -1,4 +1,4 @@
-import 'package:dart_auth/authentication/domain/domain.dart';
+import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:dio/dio.dart';
 
 extension ToAccessToken on Response {

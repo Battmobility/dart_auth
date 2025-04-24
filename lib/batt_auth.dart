@@ -1,4 +1,4 @@
-import 'package:dart_auth/authentication/domain/domain.dart';
+import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import 'authentication/presentation/screens/login_screen.dart';

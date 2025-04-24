@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print
 
 import 'package:batt_ds/batt_ds.dart';
-import 'package:dart_auth/authentication/authentication.dart';
-import 'package:dart_auth/authentication/domain/domain.dart';
-import 'package:dart_auth/dart_auth.dart';
-import 'package:dart_auth/l10n/auth_localizations.dart';
+import 'package:batt_auth/authentication/authentication.dart';
+import 'package:batt_auth/authentication/domain/domain.dart';
+import 'package:batt_auth/batt_auth.dart';
+import 'package:batt_auth/l10n/auth_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

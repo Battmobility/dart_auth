@@ -1,7 +1,7 @@
 import 'package:batt_ds/batt_ds.dart';
-import 'package:dart_auth/authentication/domain/domain.dart';
+import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:dart_auth/l10n/auth_localizations.dart';
+import 'package:batt_auth/l10n/auth_localizations.dart';
 
 final class PasswordResetWidget extends StatefulWidget {
   final Function(bool, String) onReset;

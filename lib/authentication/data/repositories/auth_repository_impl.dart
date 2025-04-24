@@ -1,5 +1,5 @@
-import 'package:dart_auth/authentication/domain/domain.dart';
-import 'package:dart_auth/authentication/domain/exceptions/exceptions.dart';
+import 'package:batt_auth/authentication/domain/domain.dart';
+import 'package:batt_auth/authentication/domain/exceptions/exceptions.dart';
 import '../datasource/auth_remote_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
