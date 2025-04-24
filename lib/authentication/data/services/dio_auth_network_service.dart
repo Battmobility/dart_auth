@@ -4,16 +4,22 @@ import 'package:dio/dio.dart';
 import 'auth_network_service.dart';
 
 final class DioAuthNetworkService implements AuthNetworkService {
+  final String keyCloakUrl;
+  final String battMobilityUrl;
   static const clientId = 'mobile';
   static const grantTypePassword = 'password';
   static const grantTypeRefresh = 'refresh_token';
 
-  final Dio keycloakService;
-  final Dio battService;
+  Dio get keycloakService => Dio(
+        BaseOptions(baseUrl: keyCloakUrl),
+      );
+  Dio get battMobilityService => Dio(
+        BaseOptions(baseUrl: battMobilityUrl),
+      );
 
   DioAuthNetworkService({
-    required this.keycloakService,
-    required this.battService,
+    required this.keyCloakUrl,
+    required this.battMobilityUrl,
   });
 
   @override
@@ -47,7 +53,7 @@ final class DioAuthNetworkService implements AuthNetworkService {
 
   @override
   Future<bool> registerUser(String email, String password) async {
-    final response = await battService.post("/user/v1/users", data: {
+    final response = await battMobilityService.post("/user/v1/users", data: {
       "email": email,
       "password": password,
     });
@@ -56,7 +62,8 @@ final class DioAuthNetworkService implements AuthNetworkService {
 
   @override
   Future<bool> resetPassword(String email) async {
-    final response = await battService.post("/user/v1/password-resets", data: {
+    final response =
+        await battMobilityService.post("/user/v1/password-resets", data: {
       "email": email,
     });
     return response.statusCode == 204;

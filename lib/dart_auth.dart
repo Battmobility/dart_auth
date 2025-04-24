@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'authentication/presentation/screens/login_screen.dart';
 
+void init(String? keycloakUrl, String? battMobilityUrl) {
+  keycloakUrl = keycloakUrl;
+  battMobilityUrl = battMobilityUrl;
+}
+
 Future<void> login(
     {required Accesstoken? accessToken,
     required BuildContext context,
@@ -14,8 +19,10 @@ Future<void> login(
           await authenticationRepository.refreshAccessToken(token: accessToken);
       onLogin(refreshedToken);
     } catch (e) {
-      await _showLoginDialog(
-          context: context, onLogin: onLogin, onException: onException);
+      if (context.mounted) {
+        await _showLoginDialog(
+            context: context, onLogin: onLogin, onException: onException);
+      }
     }
   } else {
     await _showLoginDialog(
