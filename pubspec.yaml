@@ -1,6 +1,6 @@
 name: batt_auth
 description: "An auth lib for flutter web and mobile"
-version: 1.0.1
+version: 1.0.2
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:

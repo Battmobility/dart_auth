@@ -58,7 +58,6 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                   decoration: InputDecoration(
                     labelText: AuthLocalizations.of(context).emailFieldTitle,
                   ),
-                  autofillHints: const [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
                   onChanged: (value) => userName = value,
