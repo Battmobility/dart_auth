@@ -175,6 +175,24 @@ abstract class AuthLocalizations {
   /// **'Reset password'**
   String get resetPasswordTitle;
 
+  /// No description provided for @resendVerificationEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend verification email'**
+  String get resendVerificationEmailTitle;
+
+  /// No description provided for @resendVerificationEmailConfirmationDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification email re-sent to {email}.'**
+  String resendVerificationEmailConfirmationDialogTitle(Object email);
+
+  /// No description provided for @resendVerificationEmailFailureDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to re-send verification email'**
+  String get resendVerificationEmailFailureDialogTitle;
+
   /// No description provided for @resetPasswordLabel.
   ///
   /// In en, this message translates to:

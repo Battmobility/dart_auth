@@ -68,4 +68,13 @@ final class DioAuthNetworkService implements AuthNetworkService {
     });
     return response.statusCode == 204;
   }
+
+  @override
+  Future<bool> resendVerificationEmail(String email) async {
+    final response = await battMobilityService
+        .post("/user/v1/verification-email-resends", data: {
+      "email": email,
+    });
+    return response.statusCode == 204;
+  }
 }

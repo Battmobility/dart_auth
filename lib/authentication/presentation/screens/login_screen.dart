@@ -28,7 +28,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late AuthScreens activeScreen;
-
+  bool showResendVerificationEmail = false;
   String? email;
   String? password;
 
@@ -114,12 +114,12 @@ class _LoginPageState extends State<LoginPage> {
                     style: Theme.of(context).textTheme.bodyMedium),
               ),
             LoginEntryWidget(
-              authRepo: authenticationRepository,
-              onLogin: widget.onLogin,
-              onException: widget.onException,
-              email: email,
-              password: password,
-            ),
+                authRepo: authenticationRepository,
+                onLogin: widget.onLogin,
+                onException: widget.onException,
+                email: email,
+                password: password,
+                showResendVerificationEmail: showResendVerificationEmail),
             DefaultSimpleTextButton(
               label: AuthLocalizations.of(context).resetPasswordTitle,
               onPressed: () {
@@ -173,20 +173,20 @@ class _LoginPageState extends State<LoginPage> {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
-                            title: Text(AuthLocalizations.of(context)
-                                .resetPasswordSuccessMessage(email)),
+                        return BattDialog(
+                            title: AuthLocalizations.of(context)
+                                .resetPasswordSuccessMessage(email),
                             actions: [
                               OrangeSolidTextButton(
-                                  label:
-                                      AuthLocalizations.of(context).loginTitle,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    setState(() {
-                                      activeScreen = AuthScreens.login;
-                                    });
-                                  })
-                            ]);
+                                label: AuthLocalizations.of(context).loginTitle,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    activeScreen = AuthScreens.login;
+                                  });
+                                },
+                              )
+                            ]).build(context);
                       },
                     )
                   }
@@ -195,17 +195,17 @@ class _LoginPageState extends State<LoginPage> {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
-                            title: Text(AuthLocalizations.of(context)
-                                .resetPasswordFailureMessage),
+                        return BattDialog(
+                            title: AuthLocalizations.of(context)
+                                .resetPasswordFailureMessage,
                             actions: [
                               OrangeSolidTextButton(
-                                  label:
-                                      AuthLocalizations.of(context).loginTitle,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  })
-                            ]);
+                                label: AuthLocalizations.of(context).loginTitle,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ]).build(context);
                       },
                     )
                   }
@@ -263,38 +263,41 @@ class _LoginPageState extends State<LoginPage> {
                 if (success) {
                   this.email = email;
                   this.password = password;
+                  showResendVerificationEmail = true;
                   showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
-                          title: Text(AuthLocalizations.of(context)
-                              .createAccountSuccessMessage(email)),
+                      return BattDialog(
+                          title: AuthLocalizations.of(context)
+                              .createAccountSuccessMessage(email),
                           actions: [
                             OrangeSolidTextButton(
-                                label: AuthLocalizations.of(context).loginTitle,
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  setState(() {
-                                    activeScreen = AuthScreens.login;
-                                  });
-                                })
-                          ]);
+                              label: AuthLocalizations.of(context).loginTitle,
+                              onPressed: () {
+                                Navigator.pop(context);
+                                setState(() {
+                                  activeScreen = AuthScreens.login;
+                                });
+                              },
+                            )
+                          ]).build(context);
                     },
                   );
                 } else {
                   showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
-                          title: Text(AuthLocalizations.of(context)
-                              .createAccountFailureMessage),
+                      return BattDialog(
+                          title: AuthLocalizations.of(context)
+                              .createAccountFailureMessage,
                           actions: [
                             OrangeSolidTextButton(
-                                label: AuthLocalizations.of(context).loginTitle,
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                })
-                          ]);
+                              label: AuthLocalizations.of(context).loginTitle,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            )
+                          ]).build(context);
                     },
                   );
                 }

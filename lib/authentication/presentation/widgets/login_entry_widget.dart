@@ -9,6 +9,7 @@ class LoginEntryWidget extends StatefulWidget {
   final Function(Object) onException;
   final String? email;
   final String? password;
+  final bool showResendVerificationEmail;
 
   const LoginEntryWidget({
     super.key,
@@ -17,6 +18,7 @@ class LoginEntryWidget extends StatefulWidget {
     required this.onException,
     this.email,
     this.password,
+    this.showResendVerificationEmail = false,
   });
 
   @override
@@ -121,7 +123,14 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                       if (_formKey.currentState!.validate()) {
                         _login(userName, password);
                       }
-                    })
+                    }),
+                if (widget.showResendVerificationEmail)
+                  DefaultSimpleTextButton(
+                      label: AuthLocalizations.of(context)
+                          .resendVerificationEmailTitle,
+                      onPressed: () {
+                        _resendVerificationEmail(context, userName);
+                      }),
               ]
                   .map((e) => Padding(
                         padding: AppPaddings.small.vertical,
@@ -142,6 +151,30 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
       widget.onLogin(token);
     } catch (e, _) {
       widget.onException(e);
+    }
+  }
+
+  Future<void> _resendVerificationEmail(
+      BuildContext context, String email) async {
+    final success = await widget.authRepo.resendVerificationEmail(email: email);
+    if (context.mounted) {
+      final l10n = AuthLocalizations.of(context);
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return BattDialog(
+              title: success
+                  ? l10n.resendVerificationEmailConfirmationDialogTitle(email)
+                  : l10n.resendVerificationEmailFailureDialogTitle,
+              actions: [
+                OrangeSolidTextButton(
+                    label: "Ok",
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    })
+              ]).build(ctx);
+        },
+      );
     }
   }
 }

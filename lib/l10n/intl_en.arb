@@ -65,6 +65,21 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"resendVerificationEmailTitle": "Resend verification email",
+	"@resendVerificationEmailTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resendVerificationEmailConfirmationDialogTitle": "Verification email re-sent to {email}.",
+	"@resendVerificationEmailConfirmationDialogTitle": {
+		"type": "text",
+		"placeholders": {"email": {}}
+	},
+	"resendVerificationEmailFailureDialogTitle": "Failed to re-send verification email",
+	"@resendVerificationEmailFailureDialogTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"resetPasswordLabel": "Enter the email address associated with your account to reset the password.",
 	"@resetPasswordLabel": {
 		"type": "text",

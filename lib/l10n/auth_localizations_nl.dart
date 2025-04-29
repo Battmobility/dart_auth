@@ -48,6 +48,17 @@ class AuthLocalizationsNl extends AuthLocalizations {
   String get resetPasswordTitle => 'Stel wachtwoord opnieuw in';
 
   @override
+  String get resendVerificationEmailTitle => 'Stuur verificatie email opnieuw';
+
+  @override
+  String resendVerificationEmailConfirmationDialogTitle(Object email) {
+    return 'Verificatie mail opnieuw verstuurd naar $email.';
+  }
+
+  @override
+  String get resendVerificationEmailFailureDialogTitle => 'Verificatie mail opnieuw versturen mislukt.';
+
+  @override
   String get resetPasswordLabel => 'Voer het emailadres van je account in om je wachtwoord opnieuw in te stellen.';
 
   @override

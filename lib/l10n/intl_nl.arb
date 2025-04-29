@@ -67,6 +67,21 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"resendVerificationEmailTitle": "Stuur verificatie email opnieuw",
+	"@resendVerificationEmailTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"resendVerificationEmailConfirmationDialogTitle": "Verificatie mail opnieuw verstuurd naar {email}.",
+	"@resendVerificationEmailConfirmationDialogTitle": {
+		"type": "text",
+		"placeholders": {"email": {}}
+	},
+	"resendVerificationEmailFailureDialogTitle": "Verificatie mail opnieuw versturen mislukt.",
+	"@resendVerificationEmailFailureDialogTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"resetPasswordLabel": "Voer het emailadres van je account in om je wachtwoord opnieuw in te stellen.",
 	"@resetPasswordLabel": {
 		"type": "text",

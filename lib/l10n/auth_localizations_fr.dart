@@ -48,6 +48,17 @@ class AuthLocalizationsFr extends AuthLocalizations {
   String get resetPasswordTitle => 'Reset password';
 
   @override
+  String get resendVerificationEmailTitle => 'Resend verification email';
+
+  @override
+  String resendVerificationEmailConfirmationDialogTitle(Object email) {
+    return 'Verification email re-sent to $email.';
+  }
+
+  @override
+  String get resendVerificationEmailFailureDialogTitle => 'Failed to re-send verification email';
+
+  @override
   String get resetPasswordLabel => 'Enter the email address associated with your account to reset the password.';
 
   @override

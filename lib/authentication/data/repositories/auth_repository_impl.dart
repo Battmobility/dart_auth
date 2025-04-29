@@ -40,6 +40,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<bool> resendVerificationEmail({required String email}) {
+    return authenticationDataSource.resendVerificationEmail(email);
+  }
+
+  @override
   Future<bool> resetPassword({required String email}) {
     return authenticationDataSource.resetPassword(email);
   }
