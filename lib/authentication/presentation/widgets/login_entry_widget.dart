@@ -1,6 +1,8 @@
 import 'package:batt_ds/batt_ds.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
+import 'package:batt_ds/molecules/buttons/batt_text_button.dart';
+import 'package:batt_ds/molecules/buttons/text/batt_simple_text_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginEntryWidget extends StatefulWidget {
@@ -117,7 +119,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                     }
                   },
                 ),
-                OrangeSolidTextButton(
+                DefaultSolidTextButton(
                     label: AuthLocalizations.of(context).loginButtonTitle,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -167,7 +169,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                   ? l10n.resendVerificationEmailConfirmationDialogTitle(email)
                   : l10n.resendVerificationEmailFailureDialogTitle,
               actions: [
-                OrangeSolidTextButton(
+                DefaultSimpleTextButton(
                     label: "Ok",
                     onPressed: () {
                       Navigator.of(ctx).pop();

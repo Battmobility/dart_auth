@@ -61,7 +61,7 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
                     }
                   },
                 ),
-                OrangeSolidTextButton(
+                DefaultSolidTextButton(
                     label:
                         AuthLocalizations.of(context).resetPasswordButtonTitle,
                     onPressed: () async {

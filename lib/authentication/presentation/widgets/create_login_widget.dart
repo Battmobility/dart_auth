@@ -101,7 +101,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                     }
                   },
                 ),
-                OrangeSolidTextButton(
+                DefaultSolidTextButton(
                     label:
                         AuthLocalizations.of(context).createAccountButtonTitle,
                     onPressed: () {
