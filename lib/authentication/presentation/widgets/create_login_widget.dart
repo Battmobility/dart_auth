@@ -132,7 +132,6 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
-                                      fontWeight: FontWeight.bold,
                                       decoration: TextDecoration.underline)),
                           TextSpan(
                               text: l10n.createAccountTandCLabelPt2,
@@ -148,11 +147,11 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
-                                      fontWeight: FontWeight.bold,
                                       decoration: TextDecoration.underline)),
                         ])),
                   ),
                 ),
+                SizedBox(height: AppSpacings.xs),
                 SolidCtaButton(
                     label: l10n.createAccountButtonTitle,
                     onPressed: () {

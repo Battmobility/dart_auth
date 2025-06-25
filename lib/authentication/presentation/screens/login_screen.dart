@@ -26,16 +26,63 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   late AuthScreens activeScreen;
   bool showResendVerificationEmail = false;
   String? email;
   String? password;
 
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+  bool _isForwardNavigation = true;
+
   @override
   void initState() {
     super.initState();
     activeScreen = widget.initialScreen ?? AuthScreens.login;
+
+    // Initialize animation controller
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+
+    // Start with completed animation
+    _animationController.value = 1.0;
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _changeScreen(AuthScreens newScreen) {
+    _isForwardNavigation = _getNavigationDirection(activeScreen, newScreen);
+
+    _animationController.reverse().then((_) {
+      setState(() {
+        activeScreen = newScreen;
+      });
+      _animationController.forward();
+    });
+  }
+
+  bool _getNavigationDirection(AuthScreens current, AuthScreens target) {
+    // Define a simple screen hierarchy: login < register < forgotPassword
+    final screenOrder = {
+      AuthScreens.login: 0,
+      AuthScreens.register: 1,
+      AuthScreens.forgotPassword: 2
+    };
+
+    return screenOrder[target]! > screenOrder[current]!;
   }
 
   @override
@@ -57,8 +104,34 @@ class _LoginPageState extends State<LoginPage> {
               child: SingleChildScrollView(
                 child: Card(
                   child: Padding(
-                      padding: AppPaddings.medium.vertical,
-                      child: _activeWidget()),
+                    padding: AppPaddings.medium.vertical,
+                    child: AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        // Calculate slide offset based on animation state and direction
+                        final slideOffset = _isForwardNavigation
+                            ? Tween<Offset>(
+                                begin: const Offset(0.0, 0.3),
+                                end: Offset.zero,
+                              ).evaluate(_fadeAnimation)
+                            : Tween<Offset>(
+                                begin: const Offset(0.0, -0.3),
+                                end: Offset.zero,
+                              ).evaluate(_fadeAnimation);
+
+                        return FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: Transform.translate(
+                            offset: Offset(
+                                0,
+                                slideOffset.dy *
+                                    100), // Scale for more visible effect
+                            child: _activeWidget(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -94,14 +167,10 @@ class _LoginPageState extends State<LoginPage> {
                 onLogin: widget.onLogin,
                 onException: widget.onException,
                 onCreateAccountPressed: () {
-                  setState(() {
-                    activeScreen = AuthScreens.register;
-                  });
+                  _changeScreen(AuthScreens.register);
                 },
                 onResetPasswordPressed: () {
-                  setState(() {
-                    activeScreen = AuthScreens.forgotPassword;
-                  });
+                  _changeScreen(AuthScreens.forgotPassword);
                 },
                 email: email,
                 password: password,
@@ -138,9 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                                 label: AuthLocalizations.of(context).loginTitle,
                                 onPressed: () {
                                   Navigator.pop(context);
-                                  setState(() {
-                                    activeScreen = AuthScreens.login;
-                                  });
+                                  _changeScreen(AuthScreens.login);
                                 },
                               )
                             ]).build(context);
@@ -177,9 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                 )
               },
               onCancel: () {
-                setState(() {
-                  activeScreen = AuthScreens.login;
-                });
+                _changeScreen(AuthScreens.login);
               },
             ),
           ],
@@ -252,9 +317,7 @@ class _LoginPageState extends State<LoginPage> {
                 )
               },
               onLoginPressed: () {
-                setState(() {
-                  activeScreen = AuthScreens.login;
-                });
+                _changeScreen(AuthScreens.login);
               },
             ),
           ],
