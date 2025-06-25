@@ -5,6 +5,11 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"genericCancelLabel": "Annsuleren",
+	"@genericCancelLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginButtonTitle": "Log in",
 	"@loginButtonTitle": {
 		"type": "text",
@@ -30,8 +35,23 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"forgotPasswordLabel": "Wachtwoord vergeten?",
+	"@forgotPasswordLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginErrorMessage": "Er ging iets verkeerd bij het aanmelden. Gelieve te controleren of je verbinding hebt met internet en probeer daarna opnieuw.",
 	"@loginErrorMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountLabel": "Nog geen account?",
+	"@createAccountLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"useAccountLabel": "Al een account?",
+	"@useAccountLabel": {
 		"type": "text",
 		"placeholders": {}
 	},
@@ -56,6 +76,31 @@
 		"placeholders": {"email": {
 			"type": "Object"
 		}}
+	},
+	"createAccountTandCLabelPt1": "Ik ga akkoord met de ",
+	"@createAccountTandCLabelPt1": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountTandCLabelToC": "Gebruikersovereenkomst",
+	"@createAccountTandCLabelToC": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountTandCLabelPt2": " en de ",
+	"@createAccountTandCLabelPt2": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountTandCLabelPP": "Privacyvoorwaarden.",
+	"@createAccountTandCLabelPP": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountMustAcceptTermsMessage": "Je moet onze voorwaarden accepteren om lid te kunnen worden.",
+	"@createAccountMustAcceptTermsMessage": {
+		"type": "text",
+		"placeholders": {}
 	},
 	"createAccountFailureMessage": "Sorry, er was een probleem bij het aanmaken van een account. Probeer later nogmaals of neem contact op met onze klantendienst.",
 	"@createAccountFailureMessage": {

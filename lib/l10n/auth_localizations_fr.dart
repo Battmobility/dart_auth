@@ -12,6 +12,9 @@ class AuthLocalizationsFr extends AuthLocalizations {
   String get loginTitle => 'Log in';
 
   @override
+  String get genericCancelLabel => 'Cancel';
+
+  @override
   String get loginButtonTitle => 'Log in';
 
   @override
@@ -21,13 +24,25 @@ class AuthLocalizationsFr extends AuthLocalizations {
   String get passwordFieldTitle => 'Wachtwoord';
 
   @override
-  String get loginErrorShortUsername => 'Username must be at least 6 characters long';
+  String get loginErrorShortUsername =>
+      'Username must be at least 6 characters long';
 
   @override
-  String get loginErrorShortPassword => 'Password must be at least 8 characters long';
+  String get loginErrorShortPassword =>
+      'Password must be at least 8 characters long';
 
   @override
-  String get loginErrorMessage => 'Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.';
+  String get forgotPasswordLabel => 'Forgot password?';
+
+  @override
+  String get loginErrorMessage =>
+      'Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.';
+
+  @override
+  String get createAccountLabel => 'No account yet?';
+
+  @override
+  String get useAccountLabel => 'Already a member?';
 
   @override
   String get createAccountTitle => 'Create account';
@@ -44,7 +59,24 @@ class AuthLocalizationsFr extends AuthLocalizations {
   }
 
   @override
-  String get createAccountFailureMessage => 'Sorry, there was an error creating your account. If the problem persists, please contact support.';
+  String get createAccountTandCLabelPt1 => 'I agree with the ';
+
+  @override
+  String get createAccountTandCLabelToC => 'Terms of Use';
+
+  @override
+  String get createAccountTandCLabelPt2 => ' and the ';
+
+  @override
+  String get createAccountTandCLabelPP => 'Privacy policy.';
+
+  @override
+  String get createAccountMustAcceptTermsMessage =>
+      'You must accept our terms to become a member.';
+
+  @override
+  String get createAccountFailureMessage =>
+      'Sorry, there was an error creating your account. If the problem persists, please contact support.';
 
   @override
   String get resetPasswordTitle => 'Reset password';
@@ -58,10 +90,12 @@ class AuthLocalizationsFr extends AuthLocalizations {
   }
 
   @override
-  String get resendVerificationEmailFailureDialogTitle => 'Failed to re-send verification email';
+  String get resendVerificationEmailFailureDialogTitle =>
+      'Failed to re-send verification email';
 
   @override
-  String get resetPasswordLabel => 'Enter the email address associated with your account to reset the password.';
+  String get resetPasswordLabel =>
+      'Enter the email address associated with your account to reset the password.';
 
   @override
   String get resetPasswordButtonTitle => 'Reset';
@@ -72,5 +106,6 @@ class AuthLocalizationsFr extends AuthLocalizations {
   }
 
   @override
-  String get resetPasswordFailureMessage => 'Sorry, there was an error resetting your password. If the problem persists, please contact support.';
+  String get resetPasswordFailureMessage =>
+      'Sorry, there was an error resetting your password. If the problem persists, please contact support.';
 }

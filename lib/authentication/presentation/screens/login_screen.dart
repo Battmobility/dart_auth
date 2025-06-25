@@ -55,13 +55,10 @@ class _LoginPageState extends State<LoginPage> {
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 500),
               child: SingleChildScrollView(
-                child: Padding(
-                  padding: AppPaddings.xlarge.all.add(AppPaddings.large.top),
-                  child: Card(
-                    child: Padding(
-                        padding: AppPaddings.medium.vertical,
-                        child: _activeWidget()),
-                  ),
+                child: Card(
+                  child: Padding(
+                      padding: AppPaddings.medium.vertical,
+                      child: _activeWidget()),
                 ),
               ),
             ),
@@ -77,93 +74,53 @@ class _LoginPageState extends State<LoginPage> {
         return Column(
           key: UniqueKey(),
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: AppPaddings.xlarge.horizontal,
-                    child: Text(AuthLocalizations.of(context).loginTitle,
-                        maxLines: 3,
-                        style: Theme.of(context).textTheme.headlineMedium),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: DefaultSimpleTextButton(
-                      label: AuthLocalizations.of(context).createAccountTitle,
-                      buttonSize: BattButtonSize.large,
-                      onPressed: () {
-                        setState(() {
-                          activeScreen = AuthScreens.register;
-                        });
-                      },
-                    ),
-                  ),
-                )
-              ],
+            Flexible(
+              child: Padding(
+                padding: AppPaddings.xlarge.horizontal,
+                child: Text(AuthLocalizations.of(context).loginTitle,
+                    maxLines: 3, style: Theme.of(context).textTheme.titleLarge),
+              ),
             ),
             if (widget.reason != null)
               Padding(
                 padding: AppPaddings.medium.bottom,
                 child: Text(widget.reason!,
-                    style: Theme.of(context).textTheme.bodyMedium),
+                    style: Theme.of(context).textTheme.titleSmall),
               ),
             LoginEntryWidget(
                 authRepo: authenticationRepository,
                 onLogin: widget.onLogin,
                 onException: widget.onException,
+                onCreateAccountPressed: () {
+                  setState(() {
+                    activeScreen = AuthScreens.register;
+                  });
+                },
+                onResetPasswordPressed: () {
+                  setState(() {
+                    activeScreen = AuthScreens.forgotPassword;
+                  });
+                },
                 email: email,
                 password: password,
                 showResendVerificationEmail: showResendVerificationEmail),
-            DefaultSimpleTextButton(
-              label: AuthLocalizations.of(context).resetPasswordTitle,
-              onPressed: () {
-                setState(() {
-                  activeScreen = AuthScreens.forgotPassword;
-                });
-              },
-            )
           ],
         );
       case AuthScreens.forgotPassword:
         return Column(
           key: UniqueKey(),
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: AppPaddings.xlarge.horizontal,
-                    child: Text(
-                        AuthLocalizations.of(context).resetPasswordTitle,
-                        maxLines: 3,
-                        style: Theme.of(context).textTheme.headlineMedium),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: DefaultSimpleTextButton(
-                      label: AuthLocalizations.of(context).loginTitle,
-                      buttonSize: BattButtonSize.large,
-                      onPressed: () {
-                        setState(() {
-                          activeScreen = AuthScreens.login;
-                        });
-                      },
-                    ),
-                  ),
-                )
-              ],
+            Flexible(
+              flex: 1,
+              child: Padding(
+                padding: AppPaddings.xlarge.horizontal,
+                child: Text(AuthLocalizations.of(context).resetPasswordTitle,
+                    maxLines: 3, style: Theme.of(context).textTheme.titleLarge),
+              ),
             ),
             PasswordResetWidget(
               authRepo: authenticationRepository,
@@ -177,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                             title: AuthLocalizations.of(context)
                                 .resetPasswordSuccessMessage(email),
                             actions: [
-                              OrangeSolidTextButton(
+                              DefaultSolidTextButton(
                                 label: AuthLocalizations.of(context).loginTitle,
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -199,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                             title: AuthLocalizations.of(context)
                                 .resetPasswordFailureMessage,
                             actions: [
-                              OrangeSolidTextButton(
+                              DefaultSolidTextButton(
                                 label: AuthLocalizations.of(context).loginTitle,
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -219,6 +176,11 @@ class _LoginPageState extends State<LoginPage> {
                   ).build(context),
                 )
               },
+              onCancel: () {
+                setState(() {
+                  activeScreen = AuthScreens.login;
+                });
+              },
             ),
           ],
         );
@@ -226,36 +188,14 @@ class _LoginPageState extends State<LoginPage> {
         return Column(
           key: UniqueKey(),
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: AppPaddings.xlarge.horizontal,
-                    child: Text(
-                        AuthLocalizations.of(context).createAccountTitle,
-                        maxLines: 3,
-                        style: Theme.of(context).textTheme.headlineMedium),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: DefaultSimpleTextButton(
-                      label: AuthLocalizations.of(context).loginTitle,
-                      buttonSize: BattButtonSize.large,
-                      onPressed: () {
-                        setState(() {
-                          activeScreen = AuthScreens.login;
-                        });
-                      },
-                    ),
-                  ),
-                )
-              ],
+            Flexible(
+              child: Padding(
+                padding: AppPaddings.xlarge.horizontal,
+                child: Text(AuthLocalizations.of(context).createAccountTitle,
+                    maxLines: 3, style: Theme.of(context).textTheme.titleLarge),
+              ),
             ),
             CreateLoginWidget(
               authRepo: authenticationRepository,
@@ -271,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                           title: AuthLocalizations.of(context)
                               .createAccountSuccessMessage(email),
                           actions: [
-                            OrangeSolidTextButton(
+                            DefaultSolidTextButton(
                               label: AuthLocalizations.of(context).loginTitle,
                               onPressed: () {
                                 Navigator.pop(context);
@@ -291,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                           title: AuthLocalizations.of(context)
                               .createAccountFailureMessage,
                           actions: [
-                            OrangeSolidTextButton(
+                            DefaultSolidTextButton(
                               label: AuthLocalizations.of(context).loginTitle,
                               onPressed: () {
                                 Navigator.pop(context);
@@ -310,6 +250,11 @@ class _LoginPageState extends State<LoginPage> {
                     message: e.toString(),
                   ).build(context),
                 )
+              },
+              onLoginPressed: () {
+                setState(() {
+                  activeScreen = AuthScreens.login;
+                });
               },
             ),
           ],

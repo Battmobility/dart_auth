@@ -5,6 +5,7 @@ import 'package:batt_auth/l10n/auth_localizations.dart';
 
 final class PasswordResetWidget extends StatefulWidget {
   final Function(bool, String) onReset;
+  final Function onCancel;
   final Function(Object) onException;
 
   final String? email;
@@ -16,6 +17,7 @@ final class PasswordResetWidget extends StatefulWidget {
     required this.authRepo,
     required this.onReset,
     required this.onException,
+    required this.onCancel,
   });
 
   @override
@@ -35,15 +37,18 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: AppPaddings.xlarge.all,
+            padding: AppPaddings.xlarge.all.subtract(AppPaddings.medium.top),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Text(AuthLocalizations.of(context).resetPasswordLabel,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: AppColors.neutralColors[600])),
                 TextFormField(
-                  decoration: InputDecoration(
-                    labelText: AuthLocalizations.of(context).emailFieldTitle,
-                  ),
+                  decoration: InputDecoration(),
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
                   onChanged: (value) => userName = value,
@@ -61,7 +66,7 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
                     }
                   },
                 ),
-                DefaultSolidTextButton(
+                SolidCtaButton(
                     label:
                         AuthLocalizations.of(context).resetPasswordButtonTitle,
                     onPressed: () async {
@@ -74,10 +79,15 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
                           widget.onException(e);
                         }
                       }
+                    }),
+                DefaultOutlinedTextButton(
+                    label: AuthLocalizations.of(context).genericCancelLabel,
+                    onPressed: () async {
+                      widget.onCancel();
                     })
               ]
                   .map((e) => Padding(
-                        padding: AppPaddings.xlarge.vertical,
+                        padding: AppPaddings.small.vertical,
                         child: e,
                       ))
                   .toList(),

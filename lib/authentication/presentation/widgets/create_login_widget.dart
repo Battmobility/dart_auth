@@ -1,10 +1,14 @@
+import 'package:batt_auth/authentication/presentation/widgets/checkbox_form_field.dart';
 import 'package:batt_ds/batt_ds.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final class CreateLoginWidget extends StatefulWidget {
   final Function(bool, String, String) onCreated;
+  final Function onLoginPressed;
   final Function(Object) onException;
   final AuthRepository authRepo;
 
@@ -13,6 +17,7 @@ final class CreateLoginWidget extends StatefulWidget {
     required this.authRepo,
     required this.onCreated,
     required this.onException,
+    required this.onLoginPressed,
   });
 
   @override
@@ -28,6 +33,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AuthLocalizations.of(context);
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 1000),
       child: SingleChildScrollView(
@@ -39,37 +45,42 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Text(l10n.emailFieldTitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: AppColors.neutralColors[600])),
                 TextFormField(
-                  decoration: InputDecoration(
-                    labelText: AuthLocalizations.of(context).emailFieldTitle,
-                  ),
+                  decoration: InputDecoration(),
                   keyboardType: TextInputType.emailAddress,
                   autofocus: true,
                   onChanged: (value) => userName = value,
                   initialValue: userName,
                   validator: (value) {
                     if (value == null) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortUsername;
+                      return l10n.loginErrorShortUsername;
                     }
                     if (value.length < 4) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortUsername;
+                      return l10n.loginErrorShortUsername;
                     } else {
                       return null;
                     }
                   },
                 ),
+                SizedBox(height: AppSpacings.md),
+                Text(l10n.choosePasswordFieldTitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: AppColors.neutralColors[600])),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText:
-                        AuthLocalizations.of(context).choosePasswordFieldTitle,
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: AppColors.neutralColors[600],
                       ),
                       onPressed: () {
                         setState(() {
@@ -82,12 +93,10 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                   initialValue: password,
                   validator: (value) {
                     if (value == null) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortPassword;
+                      return l10n.loginErrorShortPassword;
                     }
                     if (value.length < 8) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortPassword;
+                      return l10n.loginErrorShortPassword;
                     } else {
                       return null;
                     }
@@ -101,17 +110,96 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                     }
                   },
                 ),
-                DefaultSolidTextButton(
-                    label:
-                        AuthLocalizations.of(context).createAccountButtonTitle,
+                SizedBox(height: AppSpacings.md),
+                CheckboxFormField(
+                  validator: (value) => value == true
+                      ? ""
+                      : l10n.createAccountMustAcceptTermsMessage,
+                  title: Flexible(
+                    child: RichText(
+                        text: TextSpan(
+                            text: l10n.createAccountTandCLabelPt1,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            children: [
+                          TextSpan(
+                              text: l10n.createAccountTandCLabelToC,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(Uri.parse(
+                                      "https://www.battmobility.be/algemenevoorwaarden/"));
+                                },
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline)),
+                          TextSpan(
+                              text: l10n.createAccountTandCLabelPt2,
+                              style: Theme.of(context).textTheme.bodyLarge),
+                          TextSpan(
+                              text: l10n.createAccountTandCLabelPP,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(Uri.parse(
+                                      "https://www.battmobility.be/privacy-voorwaarden/"));
+                                },
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline)),
+                        ])),
+                  ),
+                ),
+                SolidCtaButton(
+                    label: l10n.createAccountButtonTitle,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _createLogin(userName, password);
                       }
-                    })
+                    }),
+                Padding(
+                  padding: AppPaddings.medium.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: AppPaddings.medium.trailing,
+                              child: Divider(),
+                            ),
+                          ),
+                          Text(AuthLocalizations.of(context).useAccountLabel,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                      color: AppColors.neutralColors[600])),
+                          Expanded(
+                            child: Padding(
+                              padding: AppPaddings.medium.leading,
+                              child: Divider(),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                DefaultOutlinedTextButton(
+                  label: AuthLocalizations.of(context).loginButtonTitle,
+                  onPressed: () {
+                    widget.onLoginPressed();
+                  },
+                ),
               ]
                   .map((e) => Padding(
-                        padding: AppPaddings.small.vertical,
+                        padding: AppPaddings.xsmall.vertical,
                         child: e,
                       ))
                   .toList(),

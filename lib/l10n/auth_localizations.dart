@@ -63,7 +63,8 @@ import 'auth_localizations_nl.dart';
 /// be consistent with the languages listed in the AuthLocalizations.supportedLocales
 /// property.
 abstract class AuthLocalizations {
-  AuthLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AuthLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +72,8 @@ abstract class AuthLocalizations {
     return Localizations.of<AuthLocalizations>(context, AuthLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AuthLocalizations> delegate = _AuthLocalizationsDelegate();
+  static const LocalizationsDelegate<AuthLocalizations> delegate =
+      _AuthLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,7 +85,8 @@ abstract class AuthLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -102,6 +105,12 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Log in'**
   String get loginTitle;
+
+  /// No description provided for @genericCancelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get genericCancelLabel;
 
   /// No description provided for @loginButtonTitle.
   ///
@@ -133,11 +142,29 @@ abstract class AuthLocalizations {
   /// **'Password must be at least 8 characters long'**
   String get loginErrorShortPassword;
 
+  /// No description provided for @forgotPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPasswordLabel;
+
   /// No description provided for @loginErrorMessage.
   ///
   /// In en, this message translates to:
   /// **'Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.'**
   String get loginErrorMessage;
+
+  /// No description provided for @createAccountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'No account yet?'**
+  String get createAccountLabel;
+
+  /// No description provided for @useAccountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Already a member?'**
+  String get useAccountLabel;
 
   /// No description provided for @createAccountTitle.
   ///
@@ -162,6 +189,36 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'A link to verify your email address was sent to {email}.'**
   String createAccountSuccessMessage(Object email);
+
+  /// No description provided for @createAccountTandCLabelPt1.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree with the '**
+  String get createAccountTandCLabelPt1;
+
+  /// No description provided for @createAccountTandCLabelToC.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get createAccountTandCLabelToC;
+
+  /// No description provided for @createAccountTandCLabelPt2.
+  ///
+  /// In en, this message translates to:
+  /// **' and the '**
+  String get createAccountTandCLabelPt2;
+
+  /// No description provided for @createAccountTandCLabelPP.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy.'**
+  String get createAccountTandCLabelPP;
+
+  /// No description provided for @createAccountMustAcceptTermsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You must accept our terms to become a member.'**
+  String get createAccountMustAcceptTermsMessage;
 
   /// No description provided for @createAccountFailureMessage.
   ///
@@ -218,35 +275,38 @@ abstract class AuthLocalizations {
   String get resetPasswordFailureMessage;
 }
 
-class _AuthLocalizationsDelegate extends LocalizationsDelegate<AuthLocalizations> {
+class _AuthLocalizationsDelegate
+    extends LocalizationsDelegate<AuthLocalizations> {
   const _AuthLocalizationsDelegate();
 
   @override
   Future<AuthLocalizations> load(Locale locale) {
-    return SynchronousFuture<AuthLocalizations>(lookupAuthLocalizations(locale));
+    return SynchronousFuture<AuthLocalizations>(
+        lookupAuthLocalizations(locale));
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'fr', 'nl'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'fr', 'nl'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AuthLocalizationsDelegate old) => false;
 }
 
 AuthLocalizations lookupAuthLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return AuthLocalizationsEn();
-    case 'fr': return AuthLocalizationsFr();
-    case 'nl': return AuthLocalizationsNl();
+    case 'en':
+      return AuthLocalizationsEn();
+    case 'fr':
+      return AuthLocalizationsFr();
+    case 'nl':
+      return AuthLocalizationsNl();
   }
 
   throw FlutterError(
-    'AuthLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AuthLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

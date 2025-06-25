@@ -5,6 +5,11 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"genericCancelLabel": "Cancel",
+	"@genericCancelLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginButtonTitle": "Log in",
 	"@loginButtonTitle": {
 		"type": "text",
@@ -30,8 +35,23 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"forgotPasswordLabel": "Forgot password?",
+	"@forgotPasswordLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginErrorMessage": "Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.",
 	"@loginErrorMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountLabel": "No account yet?",
+	"@createAccountLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"useAccountLabel": "Already a member?",
+	"@useAccountLabel": {
 		"type": "text",
 		"placeholders": {}
 	},
@@ -56,6 +76,31 @@
 		"placeholders": {"email": {
 			"type": "Object"
 		}}
+	},
+	"createAccountTandCLabelPt1": "I agree with the ",
+	"@createAccountTandCLabelPt1": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountTandCLabelToC": "Terms of Use",
+	"@createAccountTandCLabelToC": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountTandCLabelPt2": " and the ",
+	"@createAccountTandCLabelPt2": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountTandCLabelPP": "Privacy policy.",
+	"@createAccountTandCLabelPP": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAccountMustAcceptTermsMessage": "You must accept our terms to become a member.",
+	"@createAccountMustAcceptTermsMessage": {
+		"type": "text",
+		"placeholders": {}
 	},
 	"createAccountFailureMessage": "Sorry, there was an error creating your account. If the problem persists, please contact support.",
 	"@createAccountFailureMessage": {

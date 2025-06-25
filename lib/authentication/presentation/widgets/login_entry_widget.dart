@@ -1,13 +1,13 @@
 import 'package:batt_ds/batt_ds.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
-import 'package:batt_ds/molecules/buttons/batt_text_button.dart';
-import 'package:batt_ds/molecules/buttons/text/batt_simple_text_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginEntryWidget extends StatefulWidget {
   final AuthRepository authRepo;
   final Function(Accesstoken) onLogin;
+  final Function onResetPasswordPressed;
+  final Function onCreateAccountPressed;
   final Function(Object) onException;
   final String? email;
   final String? password;
@@ -18,6 +18,8 @@ class LoginEntryWidget extends StatefulWidget {
     required this.authRepo,
     required this.onLogin,
     required this.onException,
+    required this.onResetPasswordPressed,
+    required this.onCreateAccountPressed,
     this.email,
     this.password,
     this.showResendVerificationEmail = false,
@@ -55,91 +57,140 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
           child: Padding(
             padding: AppPaddings.xlarge.all.subtract(AppPaddings.xlarge.bottom),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: AuthLocalizations.of(context).emailFieldTitle,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: AppSpacings.sm,
+                children: [
+                  Text(AuthLocalizations.of(context).emailFieldTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: AppColors.neutralColors[600])),
+                  TextFormField(
+                    decoration: InputDecoration(),
+                    keyboardType: TextInputType.emailAddress,
+                    autofocus: true,
+                    onChanged: (value) => userName = value,
+                    initialValue: userName,
+                    validator: (value) {
+                      if (value == null) {
+                        return AuthLocalizations.of(context)
+                            .loginErrorShortUsername;
+                      }
+                      if (value.length < 4) {
+                        return AuthLocalizations.of(context)
+                            .loginErrorShortUsername;
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                  autofocus: true,
-                  onChanged: (value) => userName = value,
-                  initialValue: userName,
-                  validator: (value) {
-                    if (value == null) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortUsername;
-                    }
-                    if (value.length < 4) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortUsername;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: AuthLocalizations.of(context).passwordFieldTitle,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
-                        color: Theme.of(context).colorScheme.onSurface,
+                  SizedBox(height: AppSpacings.sm),
+                  Text(AuthLocalizations.of(context).passwordFieldTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: AppColors.neutralColors[600])),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                          color: AppColors.neutralColors[600],
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
                     ),
-                  ),
-                  onChanged: (value) => password = value,
-                  initialValue: password,
-                  validator: (value) {
-                    if (value == null) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortPassword;
-                    }
-                    if (value.length < 8) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortPassword;
-                    } else {
-                      return null;
-                    }
-                  },
-                  obscureText: _obscurePassword,
-                  autofillHints: const [AutofillHints.password],
-                  keyboardType: TextInputType.text,
-                  onEditingComplete: () async {
-                    if (_formKey.currentState!.validate()) {
-                      _login(userName, password);
-                    }
-                  },
-                ),
-                DefaultSolidTextButton(
-                    label: AuthLocalizations.of(context).loginButtonTitle,
-                    onPressed: () {
+                    onChanged: (value) => password = value,
+                    initialValue: password,
+                    validator: (value) {
+                      if (value == null) {
+                        return AuthLocalizations.of(context)
+                            .loginErrorShortPassword;
+                      }
+                      if (value.length < 8) {
+                        return AuthLocalizations.of(context)
+                            .loginErrorShortPassword;
+                      } else {
+                        return null;
+                      }
+                    },
+                    obscureText: _obscurePassword,
+                    autofillHints: const [AutofillHints.password],
+                    keyboardType: TextInputType.text,
+                    onEditingComplete: () async {
                       if (_formKey.currentState!.validate()) {
                         _login(userName, password);
                       }
-                    }),
-                if (widget.showResendVerificationEmail)
-                  DefaultSimpleTextButton(
-                      label: AuthLocalizations.of(context)
-                          .resendVerificationEmailTitle,
+                    },
+                  ),
+                  SizedBox(height: AppSpacings.md),
+                  SolidCtaButton(
+                      label: AuthLocalizations.of(context).loginButtonTitle,
                       onPressed: () {
-                        _resendVerificationEmail(context, userName);
+                        if (_formKey.currentState!.validate()) {
+                          _login(userName, password);
+                        }
                       }),
-              ]
-                  .map((e) => Padding(
-                        padding: AppPaddings.small.vertical,
-                        child: e,
-                      ))
-                  .toList(),
-            ),
+                  DefaultOutlinedTextButton(
+                    label: AuthLocalizations.of(context).resetPasswordTitle,
+                    onPressed: () {
+                      widget.onResetPasswordPressed();
+                    },
+                  ),
+                  Padding(
+                    padding: AppPaddings.medium.vertical,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: AppPaddings.medium.trailing,
+                                child: Divider(),
+                              ),
+                            ),
+                            Text(
+                                AuthLocalizations.of(context)
+                                    .createAccountLabel,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(
+                                        color: AppColors.neutralColors[600])),
+                            Expanded(
+                              child: Padding(
+                                padding: AppPaddings.medium.leading,
+                                child: Divider(),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  DefaultOutlinedTextButton(
+                    label: AuthLocalizations.of(context).createAccountTitle,
+                    onPressed: () {
+                      widget.onCreateAccountPressed();
+                    },
+                  ),
+                  if (widget.showResendVerificationEmail)
+                    OutlinedCtaButton(
+                        label: AuthLocalizations.of(context)
+                            .resendVerificationEmailTitle,
+                        onPressed: () {
+                          _resendVerificationEmail(context, userName);
+                        }),
+                ]),
           ),
         ),
       ),
