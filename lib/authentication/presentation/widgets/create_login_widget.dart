@@ -115,49 +115,45 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                   validator: (value) => value == true
                       ? ""
                       : l10n.createAccountMustAcceptTermsMessage,
-                  title: Flexible(
-                    child: RichText(
-                        text: TextSpan(
-                            text: l10n.createAccountTandCLabelPt1,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            children: [
-                          TextSpan(
-                              text: l10n.createAccountTandCLabelToC,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  launchUrl(Uri.parse(
-                                      "https://www.battmobility.be/algemenevoorwaarden/"));
-                                },
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      decoration: TextDecoration.underline)),
-                          TextSpan(
-                              text: l10n.createAccountTandCLabelPt2,
-                              style: Theme.of(context).textTheme.bodyLarge),
-                          TextSpan(
-                              text: l10n.createAccountTandCLabelPP,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  launchUrl(Uri.parse(
-                                      "https://www.battmobility.be/privacy-voorwaarden/"));
-                                },
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      decoration: TextDecoration.underline)),
-                        ])),
-                  ),
+                  title: RichText(
+                      text: TextSpan(
+                          text: l10n.createAccountTandCLabelPt1,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          children: [
+                        TextSpan(
+                            text: l10n.createAccountTandCLabelToC,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrl(Uri.parse(
+                                    "https://www.battmobility.be/algemenevoorwaarden/"));
+                              },
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    decoration: TextDecoration.underline)),
+                        TextSpan(
+                            text: l10n.createAccountTandCLabelPt2,
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        TextSpan(
+                            text: l10n.createAccountTandCLabelPP,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrl(Uri.parse(
+                                    "https://www.battmobility.be/privacy-voorwaarden/"));
+                              },
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    decoration: TextDecoration.underline)),
+                      ])),
                 ),
                 SizedBox(height: AppSpacings.xs),
                 SolidCtaButton(
                     label: l10n.createAccountButtonTitle,
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _createLogin(userName, password);
-                      }
+                      _createLogin(userName, password);
                     }),
                 Padding(
                   padding: AppPaddings.medium.vertical,
