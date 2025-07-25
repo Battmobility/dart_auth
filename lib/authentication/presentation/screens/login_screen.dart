@@ -1,3 +1,4 @@
+import 'package:batt_auth/authentication/data/services/api_exception.dart';
 import 'package:batt_ds/batt_ds.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/batt_auth.dart';
@@ -234,14 +235,19 @@ class _LoginPageState extends State<LoginPage>
                     )
                   }
               },
-              onException: (e) => {
+              onException: (e) {
+                // check if e is an ApiException
+                var msg = e.toString();
+                if (e is ApiException) {
+                  msg = e.getLocalizedMessage(context);
+                }
                 ScaffoldMessenger.of(context).showSnackBar(
                   BattSnackbar.error(
                     title: AuthLocalizations.of(context)
                         .createAccountFailureMessage,
-                    message: e.toString(),
+                    message: msg,
                   ).build(context),
-                )
+                );
               },
               onCancel: () {
                 _changeScreen(AuthScreens.login);
@@ -307,14 +313,18 @@ class _LoginPageState extends State<LoginPage>
                   );
                 }
               },
-              onException: (e) => {
+              onException: (e) {
+                var msg = e.toString();
+                if (e is ApiException) {
+                  msg = e.message;
+                }
                 ScaffoldMessenger.of(context).showSnackBar(
                   BattSnackbar.error(
                     title: AuthLocalizations.of(context)
                         .createAccountFailureMessage,
-                    message: e.toString(),
+                    message: msg,
                   ).build(context),
-                )
+                );
               },
               onLoginPressed: () {
                 _changeScreen(AuthScreens.login);
