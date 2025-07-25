@@ -57,14 +57,13 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                   onChanged: (value) => userName = value,
                   initialValue: userName,
                   validator: (value) {
-                    if (value == null) {
+                    if (value == null || value.isEmpty) {
                       return l10n.loginErrorShortUsername;
                     }
                     if (value.length < 4) {
                       return l10n.loginErrorShortUsername;
-                    } else {
-                      return null;
                     }
+                    return null;
                   },
                 ),
                 SizedBox(height: AppSpacings.md),
@@ -104,11 +103,6 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                   obscureText: _obscurePassword,
                   autofillHints: const [AutofillHints.newPassword],
                   keyboardType: TextInputType.text,
-                  onEditingComplete: () async {
-                    if (_formKey.currentState!.validate()) {
-                      _createLogin(userName, password);
-                    }
-                  },
                 ),
                 SizedBox(height: AppSpacings.md),
                 CheckboxFormField(
@@ -209,7 +203,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-    
+
     try {
       final success =
           await widget.authRepo.registerUser(email: email, password: password);
