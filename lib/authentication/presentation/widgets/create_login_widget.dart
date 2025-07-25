@@ -113,7 +113,7 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                 SizedBox(height: AppSpacings.md),
                 CheckboxFormField(
                   validator: (value) => value == true
-                      ? ""
+                      ? null
                       : l10n.createAccountMustAcceptTermsMessage,
                   title: RichText(
                       text: TextSpan(
@@ -206,16 +206,16 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
   }
 
   void _createLogin(String email, String password) async {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
-    
-    try {
-      final success =
-          await widget.authRepo.registerUser(email: email, password: password);
-      widget.onCreated(success, email, password);
-    } catch (e, _) {
-      widget.onException(e);
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      try {
+        final success = await widget.authRepo
+            .registerUser(email: email, password: password);
+        widget.onCreated(success, email, password);
+      } catch (e, _) {
+        widget.onException(e);
+      }
     }
   }
 }
