@@ -206,6 +206,10 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
   }
 
   void _createLogin(String email, String password) async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    
     try {
       final success =
           await widget.authRepo.registerUser(email: email, password: password);
