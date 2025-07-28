@@ -55,7 +55,7 @@ class AuthLocalizationsNl extends AuthLocalizations {
 
   @override
   String createAccountSuccessMessage(Object email) {
-    return 'Er werd een link om het emailadres te bevestigen verstuurd naar $email.';
+    return 'Er werd een link om het emailadres te bevestigen verstuurd naar $email. Controleer ook zeker je spam folder.';
   }
 
   @override

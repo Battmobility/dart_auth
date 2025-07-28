@@ -55,7 +55,7 @@ class AuthLocalizationsEn extends AuthLocalizations {
 
   @override
   String createAccountSuccessMessage(Object email) {
-    return 'A link to verify your email address was sent to $email.';
+    return 'A link to verify your email address was sent to $email. Please check your spam folder as well.';
   }
 
   @override

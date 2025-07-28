@@ -70,7 +70,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"createAccountSuccessMessage": "Er werd een link om het emailadres te bevestigen verstuurd naar {email}.",
+	"createAccountSuccessMessage": "Er werd een link om het emailadres te bevestigen verstuurd naar {email}. Controleer ook zeker je spam folder.",
 	"@createAccountSuccessMessage": {
 		"type": "text",
 		"placeholders": {"email": {

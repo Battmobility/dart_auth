@@ -70,7 +70,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"createAccountSuccessMessage": "A link to verify your email address was sent to {email}.",
+	"createAccountSuccessMessage": "Un lien pour vérifier votre adresse e-mail a été envoyé à {email}. Veuillez également vérifier votre dossier spam.",
 	"@createAccountSuccessMessage": {
 		"type": "text",
 		"placeholders": {"email": {

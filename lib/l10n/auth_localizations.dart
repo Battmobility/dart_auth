@@ -187,7 +187,7 @@ abstract class AuthLocalizations {
   /// No description provided for @createAccountSuccessMessage.
   ///
   /// In en, this message translates to:
-  /// **'A link to verify your email address was sent to {email}.'**
+  /// **'A link to verify your email address was sent to {email}. Please check your spam folder as well.'**
   String createAccountSuccessMessage(Object email);
 
   /// No description provided for @createAccountTandCLabelPt1.
