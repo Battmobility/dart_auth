@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:dio/dio.dart';
 
@@ -25,17 +26,48 @@ final class DioAuthNetworkService implements AuthNetworkService {
 
   @override
   Future<Accesstoken> getAuthToken(String userName, String password) async {
-    final response = await keycloakService.post(
-      "/protocol/openid-connect/token",
-      data: {
-        'client_id': clientId,
-        'username': userName,
-        'password': password,
-        'grant_type': grantTypePassword
-      },
-      options: Options(contentType: Headers.formUrlEncodedContentType),
-    );
-    return response.toAccessToken();
+    try {
+      final response = await keycloakService.post(
+        "/protocol/openid-connect/token",
+        data: {
+          'client_id': clientId,
+          'username': userName,
+          'password': password,
+          'grant_type': grantTypePassword
+        },
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+      );
+      return response.toAccessToken();
+    } catch (e) {
+      if (e is DioException && e.response?.statusCode == 400) {
+        try {
+          final responseData = e.response?.data;
+          String? errorDescription;
+          
+          if (responseData is Map<String, dynamic> && responseData.containsKey('error_description')) {
+            errorDescription = responseData['error_description'];
+          } else if (responseData is String) {
+            final jsonData = jsonDecode(responseData);
+            if (jsonData is Map<String, dynamic> && jsonData.containsKey('error_description')) {
+              errorDescription = jsonData['error_description'];
+            }
+          }
+          
+          if (errorDescription != null) {
+            throw ApiException(
+              message: errorDescription, 
+              statusCode: 400, 
+              identifier: "auth_error_400"
+            );
+          }
+        } catch (apiException) {
+          if (apiException is ApiException) {
+            rethrow;
+          }
+        }
+      }
+      rethrow;
+    }
   }
 
   @override

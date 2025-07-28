@@ -1,4 +1,5 @@
 import 'package:batt_ds/batt_ds.dart';
+import 'package:batt_auth/authentication/data/services/api_exception.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
 import 'package:flutter/material.dart';
@@ -203,6 +204,14 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
           await widget.authRepo.loginUser(userName: email, password: password);
       widget.onLogin(token);
     } catch (e, _) {
+      if (e is ApiException && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          BattSnackbar.error(
+            title: AuthLocalizations.of(context).createAccountFailureMessage,
+            message: e.message,
+          ).build(context),
+        );
+      }
       widget.onException(e);
     }
   }
