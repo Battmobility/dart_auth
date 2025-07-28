@@ -273,6 +273,18 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, there was an error resetting your password. If the problem persists, please contact support.'**
   String get resetPasswordFailureMessage;
+
+  /// No description provided for @passwordSafetyConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'I have saved my password in a safe place so I can use it to login to the mobile application later.'**
+  String get passwordSafetyConfirmationMessage;
+
+  /// No description provided for @passwordSafetyMustConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You must confirm that you have saved your password.'**
+  String get passwordSafetyMustConfirmMessage;
 }
 
 class _AuthLocalizationsDelegate

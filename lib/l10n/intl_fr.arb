@@ -149,5 +149,15 @@
 	"@resetPasswordFailureMessage": {
 		"type": "text",
 		"placeholders": {}
+	},
+	"passwordSafetyConfirmationMessage": "J''ai sauvegardé mon mot de passe dans un endroit sûr pour pouvoir l''utiliser pour me connecter à l''application mobile plus tard.",
+	"@passwordSafetyConfirmationMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordSafetyMustConfirmMessage": "Vous devez confirmer que vous avez sauvegardé votre mot de passe.",
+	"@passwordSafetyMustConfirmMessage": {
+		"type": "text",
+		"placeholders": {}
 	}
 }

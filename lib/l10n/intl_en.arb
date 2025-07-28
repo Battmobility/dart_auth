@@ -144,5 +144,15 @@
 	"@resetPasswordFailureMessage": {
 		"type": "text",
 		"placeholders": {}
+	},
+	"passwordSafetyConfirmationMessage": "I have saved my password in a safe place so I can use it to login to the mobile application later.",
+	"@passwordSafetyConfirmationMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordSafetyMustConfirmMessage": "You must confirm that you have saved your password.",
+	"@passwordSafetyMustConfirmMessage": {
+		"type": "text",
+		"placeholders": {}
 	}
 }

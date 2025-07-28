@@ -114,6 +114,16 @@ class CreateLoginWidgetState extends State<CreateLoginWidget> {
                 CheckboxFormField(
                   validator: (value) => value == true
                       ? null
+                      : l10n.passwordSafetyMustConfirmMessage,
+                  title: Text(
+                    l10n.passwordSafetyConfirmationMessage,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                SizedBox(height: AppSpacings.xs),
+                CheckboxFormField(
+                  validator: (value) => value == true
+                      ? null
                       : l10n.createAccountMustAcceptTermsMessage,
                   title: RichText(
                       text: TextSpan(
