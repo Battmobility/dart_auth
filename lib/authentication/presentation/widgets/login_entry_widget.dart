@@ -12,6 +12,7 @@ class LoginEntryWidget extends StatefulWidget {
   final String? email;
   final String? password;
   final bool showResendVerificationEmail;
+  final bool showAccountCreation;
 
   const LoginEntryWidget({
     super.key,
@@ -23,6 +24,7 @@ class LoginEntryWidget extends StatefulWidget {
     this.email,
     this.password,
     this.showResendVerificationEmail = false,
+    this.showAccountCreation = true,
   });
 
   @override
@@ -144,45 +146,47 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                       widget.onResetPasswordPressed();
                     },
                   ),
-                  Padding(
-                    padding: AppPaddings.medium.vertical,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: AppPaddings.medium.trailing,
-                                child: Divider(),
+                  if (widget.showAccountCreation) ...[
+                    Padding(
+                      padding: AppPaddings.medium.vertical,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: AppPaddings.medium.trailing,
+                                  child: Divider(),
+                                ),
                               ),
-                            ),
-                            Text(
-                                AuthLocalizations.of(context)
-                                    .createAccountLabel,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                        color: AppColors.neutralColors[600])),
-                            Expanded(
-                              child: Padding(
-                                padding: AppPaddings.medium.leading,
-                                child: Divider(),
+                              Text(
+                                  AuthLocalizations.of(context)
+                                      .createAccountLabel,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          color: AppColors.neutralColors[600])),
+                              Expanded(
+                                child: Padding(
+                                  padding: AppPaddings.medium.leading,
+                                  child: Divider(),
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  DefaultOutlinedTextButton(
-                    label: AuthLocalizations.of(context).createAccountTitle,
-                    onPressed: () {
-                      widget.onCreateAccountPressed();
-                    },
-                  ),
+                    DefaultOutlinedTextButton(
+                      label: AuthLocalizations.of(context).createAccountTitle,
+                      onPressed: () {
+                        widget.onCreateAccountPressed();
+                      },
+                    ),
+                  ],
                   if (widget.showResendVerificationEmail)
                     OutlinedCtaButton(
                         label: AuthLocalizations.of(context)

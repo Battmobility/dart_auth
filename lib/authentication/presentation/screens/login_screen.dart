@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
   final Function(Object) onException;
   final String? reason;
   final AuthScreens? initialScreen;
+  final bool showAccountCreation;
 
   const LoginPage({
     required this.onLogin,
@@ -21,6 +22,7 @@ class LoginPage extends StatefulWidget {
     super.key,
     this.reason,
     this.initialScreen = AuthScreens.login,
+    this.showAccountCreation = true,
   });
 
   @override
@@ -167,6 +169,7 @@ class _LoginPageState extends State<LoginPage>
                 authRepo: authenticationRepository,
                 onLogin: widget.onLogin,
                 onException: widget.onException,
+                showAccountCreation: widget.showAccountCreation,
                 onCreateAccountPressed: () {
                   _changeScreen(AuthScreens.register);
                 },
