@@ -187,7 +187,7 @@ abstract class AuthLocalizations {
   /// No description provided for @createAccountSuccessMessage.
   ///
   /// In en, this message translates to:
-  /// **'A link to verify your email address was sent to {email}.'**
+  /// **'A link to verify your email address was sent to {email}. Please check your spam folder as well.'**
   String createAccountSuccessMessage(Object email);
 
   /// No description provided for @createAccountTandCLabelPt1.
@@ -273,6 +273,18 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, there was an error resetting your password. If the problem persists, please contact support.'**
   String get resetPasswordFailureMessage;
+
+  /// No description provided for @passwordSafetyConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'I have saved my password in a safe place so I can use it to login to the mobile application later.'**
+  String get passwordSafetyConfirmationMessage;
+
+  /// No description provided for @passwordSafetyMustConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You must confirm that you have saved your password.'**
+  String get passwordSafetyMustConfirmMessage;
 }
 
 class _AuthLocalizationsDelegate

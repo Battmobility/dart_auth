@@ -55,7 +55,7 @@ class AuthLocalizationsNl extends AuthLocalizations {
 
   @override
   String createAccountSuccessMessage(Object email) {
-    return 'Er werd een link om het emailadres te bevestigen verstuurd naar $email.';
+    return 'Er werd een link om het emailadres te bevestigen verstuurd naar $email. Controleer ook zeker je spam folder.';
   }
 
   @override
@@ -108,4 +108,12 @@ class AuthLocalizationsNl extends AuthLocalizations {
   @override
   String get resetPasswordFailureMessage =>
       'Sorry, er was een probleem bij het opnieuw instellen. Probeer later nogmaals of neem contact op met onze klantendienst.';
+
+  @override
+  String get passwordSafetyConfirmationMessage =>
+      'Ik heb mijn wachtwoord op een veilige plaats bewaard zodat ik het later kan gebruiken om in te loggen op de mobiele applicatie.';
+
+  @override
+  String get passwordSafetyMustConfirmMessage =>
+      'Je moet bevestigen dat je je wachtwoord hebt bewaard.';
 }

@@ -70,7 +70,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"createAccountSuccessMessage": "A link to verify your email address was sent to {email}.",
+	"createAccountSuccessMessage": "Un lien pour vérifier votre adresse e-mail a été envoyé à {email}. Veuillez également vérifier votre dossier spam.",
 	"@createAccountSuccessMessage": {
 		"type": "text",
 		"placeholders": {"email": {
@@ -147,6 +147,16 @@
 	},
 	"resetPasswordFailureMessage": "Sorry, there was an error resetting your password. If the problem persists, please contact support.",
 	"@resetPasswordFailureMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordSafetyConfirmationMessage": "J''ai sauvegardé mon mot de passe dans un endroit sûr pour pouvoir l''utiliser pour me connecter à l''application mobile plus tard.",
+	"@passwordSafetyConfirmationMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordSafetyMustConfirmMessage": "Vous devez confirmer que vous avez sauvegardé votre mot de passe.",
+	"@passwordSafetyMustConfirmMessage": {
 		"type": "text",
 		"placeholders": {}
 	}

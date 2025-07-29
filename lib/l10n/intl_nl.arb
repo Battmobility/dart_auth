@@ -70,7 +70,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"createAccountSuccessMessage": "Er werd een link om het emailadres te bevestigen verstuurd naar {email}.",
+	"createAccountSuccessMessage": "Er werd een link om het emailadres te bevestigen verstuurd naar {email}. Controleer ook zeker je spam folder.",
 	"@createAccountSuccessMessage": {
 		"type": "text",
 		"placeholders": {"email": {
@@ -146,6 +146,16 @@
 	},
 	"resetPasswordFailureMessage": "Sorry, er was een probleem bij het opnieuw instellen. Probeer later nogmaals of neem contact op met onze klantendienst.",
 	"@resetPasswordFailureMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordSafetyConfirmationMessage": "Ik heb mijn wachtwoord op een veilige plaats bewaard zodat ik het later kan gebruiken om in te loggen op de mobiele applicatie.",
+	"@passwordSafetyConfirmationMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordSafetyMustConfirmMessage": "Je moet bevestigen dat je je wachtwoord hebt bewaard.",
+	"@passwordSafetyMustConfirmMessage": {
 		"type": "text",
 		"placeholders": {}
 	}

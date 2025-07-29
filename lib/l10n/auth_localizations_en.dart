@@ -55,7 +55,7 @@ class AuthLocalizationsEn extends AuthLocalizations {
 
   @override
   String createAccountSuccessMessage(Object email) {
-    return 'A link to verify your email address was sent to $email.';
+    return 'A link to verify your email address was sent to $email. Please check your spam folder as well.';
   }
 
   @override
@@ -108,4 +108,12 @@ class AuthLocalizationsEn extends AuthLocalizations {
   @override
   String get resetPasswordFailureMessage =>
       'Sorry, there was an error resetting your password. If the problem persists, please contact support.';
+
+  @override
+  String get passwordSafetyConfirmationMessage =>
+      'I have saved my password in a safe place so I can use it to login to the mobile application later.';
+
+  @override
+  String get passwordSafetyMustConfirmMessage =>
+      'You must confirm that you have saved your password.';
 }
