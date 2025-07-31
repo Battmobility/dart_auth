@@ -18,6 +18,9 @@ class AuthLocalizationsNl extends AuthLocalizations {
   String get loginButtonTitle => 'Log in';
 
   @override
+  String get loginfailedMessage => 'Aanmelden mislukt';
+
+  @override
   String get emailFieldTitle => 'E-mail';
 
   @override

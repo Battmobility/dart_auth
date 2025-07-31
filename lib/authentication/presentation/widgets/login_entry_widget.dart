@@ -2,6 +2,7 @@ import 'package:batt_ds/batt_ds.dart';
 import 'package:batt_auth/authentication/data/services/api_exception.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class LoginEntryWidget extends StatefulWidget {
@@ -207,7 +208,8 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                         label: AuthLocalizations.of(context)
                             .resendVerificationEmailTitle,
                         onPressed: () {
-                          _resendVerificationEmail(context, _emailController.text);
+                          _resendVerificationEmail(
+                              context, _emailController.text);
                         }),
                 ]),
           ),
@@ -218,16 +220,21 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
 
   void _login(String email, String password) async {
     try {
+      FocusScope.of(context).unfocus();
       final token =
           await widget.authRepo.loginUser(userName: email, password: password);
       widget.onLogin(token);
     } catch (e, _) {
-      if (e is ApiException && mounted) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           BattSnackbar.error(
-            title: AuthLocalizations.of(context).createAccountFailureMessage,
-            message: e.message,
-          ).build(context),
+                  title: AuthLocalizations.of(context).loginfailedMessage,
+                  message: (e is ApiException)
+                      ? "Status code: ${e.statusCode}"
+                      : (e is DioException)
+                          ? "Status code: ${e.response?.statusCode}"
+                          : null)
+              .build(context),
         );
       }
       widget.onException(e);

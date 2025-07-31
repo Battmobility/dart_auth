@@ -118,6 +118,12 @@ abstract class AuthLocalizations {
   /// **'Log in'**
   String get loginButtonTitle;
 
+  /// No description provided for @loginfailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed'**
+  String get loginfailedMessage;
+
   /// No description provided for @emailFieldTitle.
   ///
   /// In en, this message translates to:

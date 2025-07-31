@@ -35,6 +35,11 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"loginfailedMessage": "Aanmelden mislukt",
+	"@loginfailedMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"forgotPasswordLabel": "Wachtwoord vergeten?",
 	"@forgotPasswordLabel": {
 		"type": "text",
