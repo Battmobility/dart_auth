@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage>
     switch (activeScreen) {
       case AuthScreens.login:
         return Column(
-          key: UniqueKey(),
+          key: const ValueKey('login_screen'),
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage>
         );
       case AuthScreens.forgotPassword:
         return Column(
-          key: UniqueKey(),
+          key: const ValueKey('forgot_password_screen'),
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -260,7 +260,7 @@ class _LoginPageState extends State<LoginPage>
         );
       case AuthScreens.register:
         return Column(
-          key: UniqueKey(),
+          key: const ValueKey('register_screen'),
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

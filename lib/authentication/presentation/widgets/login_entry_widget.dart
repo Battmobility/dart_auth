@@ -34,21 +34,37 @@ class LoginEntryWidget extends StatefulWidget {
 
 class _LoginEntryWidgetState extends State<LoginEntryWidget> {
   final _formKey = GlobalKey<FormState>();
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
   bool _obscurePassword = true;
 
   @override
   void initState() {
     super.initState();
-    if (widget.email != null && widget.password != null) {
-      setState(() {
-        userName = widget.email!;
-        password = widget.password!;
-      });
+    _emailController = TextEditingController(text: widget.email ?? '');
+    _passwordController = TextEditingController(text: widget.password ?? '');
+  }
+
+  @override
+  void didUpdateWidget(LoginEntryWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.email != oldWidget.email) {
+      _emailController.text = widget.email ?? '';
+    }
+    if (widget.password != oldWidget.password) {
+      _passwordController.text = widget.password ?? '';
     }
   }
 
-  String userName = "";
-  String password = "";
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  String get userName => _emailController.text;
+  String get password => _passwordController.text;
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +86,10 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                           .bodySmall!
                           .copyWith(color: AppColors.neutralColors[600])),
                   TextFormField(
+                    controller: _emailController,
                     decoration: InputDecoration(),
                     keyboardType: TextInputType.emailAddress,
                     autofocus: true,
-                    onChanged: (value) => userName = value,
-                    initialValue: userName,
                     validator: (value) {
                       if (value == null) {
                         return AuthLocalizations.of(context)
@@ -95,6 +110,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                           .bodySmall!
                           .copyWith(color: AppColors.neutralColors[600])),
                   TextFormField(
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -110,8 +126,6 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                         },
                       ),
                     ),
-                    onChanged: (value) => password = value,
-                    initialValue: password,
                     validator: (value) {
                       if (value == null) {
                         return AuthLocalizations.of(context)
@@ -193,7 +207,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                         label: AuthLocalizations.of(context)
                             .resendVerificationEmailTitle,
                         onPressed: () {
-                          _resendVerificationEmail(context, userName);
+                          _resendVerificationEmail(context, _emailController.text);
                         }),
                 ]),
           ),
