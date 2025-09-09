@@ -142,6 +142,12 @@ abstract class AuthLocalizations {
   /// **'Username must be at least 6 characters long'**
   String get loginErrorShortUsername;
 
+  /// No description provided for @loginErrorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must be a valid email address'**
+  String get loginErrorInvalidEmail;
+
   /// No description provided for @loginErrorShortPassword.
   ///
   /// In en, this message translates to:
@@ -153,6 +159,12 @@ abstract class AuthLocalizations {
   /// In en, this message translates to:
   /// **'Forgot password?'**
   String get forgotPasswordLabel;
+
+  /// No description provided for @loginErrorUnauthorized.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed, check your credentials'**
+  String get loginErrorUnauthorized;
 
   /// No description provided for @loginErrorMessage.
   ///

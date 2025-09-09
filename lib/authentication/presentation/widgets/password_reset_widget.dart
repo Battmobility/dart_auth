@@ -38,59 +38,63 @@ class PasswordResetWidgetState extends State<PasswordResetWidget> {
           key: _formKey,
           child: Padding(
             padding: AppPaddings.xlarge.all.subtract(AppPaddings.medium.top),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(AuthLocalizations.of(context).resetPasswordLabel,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: AppColors.neutralColors[600])),
-                TextFormField(
-                  decoration: InputDecoration(),
-                  keyboardType: TextInputType.emailAddress,
-                  autofocus: true,
-                  onChanged: (value) => userName = value,
-                  initialValue: userName,
-                  validator: (value) {
-                    if (value == null) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortUsername;
-                    }
-                    if (value.length < 4) {
-                      return AuthLocalizations.of(context)
-                          .loginErrorShortUsername;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                SolidCtaButton(
-                    label:
-                        AuthLocalizations.of(context).resetPasswordButtonTitle,
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        try {
-                          final success = await widget.authRepo
-                              .resetPassword(email: userName);
-                          widget.onReset(success, userName);
-                        } catch (e, _) {
-                          widget.onException(e);
-                        }
+            child: AutofillGroup(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(AuthLocalizations.of(context).resetPasswordLabel,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: AppColors.neutralColors[600])),
+                  TextFormField(
+                    autofillHints: [AutofillHints.username],
+                    decoration: InputDecoration(),
+                    keyboardType: TextInputType.emailAddress,
+                    autofocus: true,
+                    onChanged: (value) => userName = value,
+                    initialValue: userName,
+                    validator: (value) {
+                      if (value == null) {
+                        return AuthLocalizations.of(context)
+                            .loginErrorShortUsername;
                       }
-                    }),
-                DefaultOutlinedTextButton(
-                    label: AuthLocalizations.of(context).genericCancelLabel,
-                    onPressed: () async {
-                      widget.onCancel();
-                    })
-              ]
-                  .map((e) => Padding(
-                        padding: AppPaddings.small.vertical,
-                        child: e,
-                      ))
-                  .toList(),
+                      if (value.length < 4) {
+                        return AuthLocalizations.of(context)
+                            .loginErrorShortUsername;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SolidCtaButton(
+                      label: AuthLocalizations.of(context)
+                          .resetPasswordButtonTitle,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          try {
+                            final success = await widget.authRepo
+                                .resetPassword(email: userName);
+                            widget.onReset(success, userName);
+                          } catch (e, _) {
+                            widget.onException(e);
+                          }
+                        }
+                      }),
+                  DefaultOutlinedTextButton(
+                      buttonSize: BattButtonSize.xLarge,
+                      label: AuthLocalizations.of(context).genericCancelLabel,
+                      onPressed: () async {
+                        widget.onCancel();
+                      })
+                ]
+                    .map((e) => Padding(
+                          padding: AppPaddings.small.vertical,
+                          child: e,
+                        ))
+                    .toList(),
+              ),
             ),
           ),
         ),

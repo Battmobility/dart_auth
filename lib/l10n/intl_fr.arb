@@ -30,6 +30,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"loginErrorInvalidEmail": "Username must be a valid email address",
 	"loginErrorShortPassword": "Password must be at least 8 characters long",
 	"@loginErrorShortPassword": {
 		"type": "text",
@@ -45,6 +46,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"loginErrorUnauthorized": "Login failed, check your credentials",
 	"loginErrorMessage": "Something went wrong while trying to log in. Please ensure you are connected to the internet and try again.",
 	"@loginErrorMessage": {
 		"type": "text",

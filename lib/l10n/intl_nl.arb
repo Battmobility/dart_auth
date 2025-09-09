@@ -5,7 +5,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"genericCancelLabel": "Annsuleren",
+	"genericCancelLabel": "Annuleren",
 	"@genericCancelLabel": {
 		"type": "text",
 		"placeholders": {}
@@ -30,11 +30,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"loginErrorInvalidEmail": "Gebruikersnaam moet een geldig emailadres zijn",
 	"loginErrorShortPassword": "Wachtwoord moet minstens 8 karakters lang zijn",
 	"@loginErrorShortPassword": {
 		"type": "text",
 		"placeholders": {}
 	},
+	"loginErrorUnauthorized": "Aanmelden mislukt, controleer je inloggegevens",
 	"loginfailedMessage": "Aanmelden mislukt",
 	"@loginfailedMessage": {
 		"type": "text",

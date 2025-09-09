@@ -1,9 +1,12 @@
+import 'package:batt_auth/authentication/utils/email_validator.dart';
+import 'package:batt_auth/authentication/utils/text_size.dart';
 import 'package:batt_ds/batt_ds.dart';
 import 'package:batt_auth/authentication/data/services/api_exception.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginEntryWidget extends StatefulWidget {
   final AuthRepository authRepo;
@@ -38,6 +41,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   bool _obscurePassword = true;
+  String? loginError;
 
   @override
   void initState() {
@@ -69,6 +73,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AuthLocalizations.of(context);
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 1000),
       child: SingleChildScrollView(
@@ -76,142 +81,157 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
           key: _formKey,
           child: Padding(
             padding: AppPaddings.xlarge.all.subtract(AppPaddings.xlarge.bottom),
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                spacing: AppSpacings.sm,
-                children: [
-                  Text(AuthLocalizations.of(context).emailFieldTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: AppColors.neutralColors[600])),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(),
-                    keyboardType: TextInputType.emailAddress,
-                    autofocus: true,
-                    validator: (value) {
-                      if (value == null) {
-                        return AuthLocalizations.of(context)
-                            .loginErrorShortUsername;
-                      }
-                      if (value.length < 4) {
-                        return AuthLocalizations.of(context)
-                            .loginErrorShortUsername;
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: AppSpacings.sm),
-                  Text(AuthLocalizations.of(context).passwordFieldTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: AppColors.neutralColors[600])),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                          color: AppColors.neutralColors[600],
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
+            child: AutofillGroup(
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  spacing: AppSpacings.xxs,
+                  children: [
+                    Text(l10n.emailFieldTitle,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: AppColors.neutralColors[600])),
+                    SizedBox(height: AppSpacings.xs),
+                    TextFormField(
+                      autofillHints: [AutofillHints.email],
+                      controller: _emailController,
+                      decoration: InputDecoration(),
+                      keyboardType: TextInputType.emailAddress,
+                      autofocus: true,
+                      validator: (value) {
+                        if (!value.isValidEmail()) {
+                          return l10n.loginErrorInvalidEmail;
+                        }
+                        if (value == null) {
+                          return l10n.loginErrorShortUsername;
+                        }
+                        if (value.length < 4) {
+                          return l10n.loginErrorShortUsername;
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null) {
-                        return AuthLocalizations.of(context)
-                            .loginErrorShortPassword;
-                      }
-                      if (value.length < 8) {
-                        return AuthLocalizations.of(context)
-                            .loginErrorShortPassword;
-                      } else {
-                        return null;
-                      }
-                    },
-                    obscureText: _obscurePassword,
-                    autofillHints: const [AutofillHints.password],
-                    keyboardType: TextInputType.text,
-                    onEditingComplete: () async {
-                      if (_formKey.currentState!.validate()) {
-                        _login(userName, password);
-                      }
-                    },
-                  ),
-                  SizedBox(height: AppSpacings.md),
-                  SolidCtaButton(
-                      label: AuthLocalizations.of(context).loginButtonTitle,
-                      onPressed: () {
+                    SizedBox(height: AppSpacings.lg),
+                    Text(l10n.passwordFieldTitle,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: AppColors.neutralColors[600])),
+                    SizedBox(height: AppSpacings.xs),
+                    TextFormField(
+                      autofillHints: [AutofillHints.password],
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            color: AppColors.neutralColors[600],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null) {
+                          return l10n.loginErrorShortPassword;
+                        }
+                        if (value.length < 8) {
+                          return l10n.loginErrorShortPassword;
+                        } else {
+                          return null;
+                        }
+                      },
+                      obscureText: _obscurePassword,
+                      keyboardType: TextInputType.text,
+                      onEditingComplete: () async {
                         if (_formKey.currentState!.validate()) {
                           _login(userName, password);
                         }
-                      }),
-                  DefaultOutlinedTextButton(
-                    label: AuthLocalizations.of(context).resetPasswordTitle,
-                    onPressed: () {
-                      widget.onResetPasswordPressed();
-                    },
-                  ),
-                  if (widget.showAccountCreation) ...[
-                    Padding(
-                      padding: AppPaddings.medium.vertical,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: AppPaddings.medium.trailing,
-                                  child: Divider(),
-                                ),
-                              ),
-                              Text(
-                                  AuthLocalizations.of(context)
-                                      .createAccountLabel,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                          color: AppColors.neutralColors[600])),
-                              Expanded(
-                                child: Padding(
-                                  padding: AppPaddings.medium.leading,
-                                  child: Divider(),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    DefaultOutlinedTextButton(
-                      label: AuthLocalizations.of(context).createAccountTitle,
-                      onPressed: () {
-                        widget.onCreateAccountPressed();
                       },
                     ),
-                  ],
-                  if (widget.showResendVerificationEmail)
-                    OutlinedCtaButton(
-                        label: AuthLocalizations.of(context)
-                            .resendVerificationEmailTitle,
+                    Padding(
+                      padding: AppPaddings.small.vertical,
+                      child: Text(
+                        loginError ?? "",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium!
+                            .copyWith(color: AppColors.rusticClay),
+                      ),
+                    ),
+                    SolidCtaButton(
+                        label: AuthLocalizations.of(context).loginButtonTitle,
                         onPressed: () {
-                          _resendVerificationEmail(
-                              context, _emailController.text);
+                          if (_formKey.currentState!.validate()) {
+                            _login(userName, password);
+                          }
                         }),
-                ]),
+                    MonochromeSimpleTextButton(
+                      underline: true,
+                      label: AuthLocalizations.of(context).resetPasswordTitle,
+                      onPressed: () {
+                        widget.onResetPasswordPressed();
+                      },
+                    ),
+                    if (widget.showAccountCreation) ...[
+                      Padding(
+                        padding: AppPaddings.medium.vertical,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: AppPaddings.medium.trailing,
+                                    child: Divider(),
+                                  ),
+                                ),
+                                Text(
+                                    AuthLocalizations.of(context)
+                                        .createAccountLabel,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                            color:
+                                                AppColors.neutralColors[600])),
+                                Expanded(
+                                  child: Padding(
+                                    padding: AppPaddings.medium.leading,
+                                    child: Divider(),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      OutlinedCtaButton(
+                        label: AuthLocalizations.of(context).createAccountTitle,
+                        onPressed: () {
+                          widget.onCreateAccountPressed();
+                        },
+                      ),
+                    ],
+                    if (widget.showResendVerificationEmail)
+                      OutlinedCtaButton(
+                          label: AuthLocalizations.of(context)
+                              .resendVerificationEmailTitle,
+                          onPressed: () {
+                            _resendVerificationEmail(
+                                context, _emailController.text);
+                          }),
+                  ]),
+            ),
           ),
         ),
       ),
@@ -220,23 +240,24 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
 
   void _login(String email, String password) async {
     try {
+      TextInput.finishAutofillContext();
+      setState(() {
+        loginError = null;
+      });
       FocusScope.of(context).unfocus();
       final token =
           await widget.authRepo.loginUser(userName: email, password: password);
       widget.onLogin(token);
     } catch (e, _) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          BattSnackbar.error(
-                  title: AuthLocalizations.of(context).loginfailedMessage,
-                  message: (e is ApiException)
-                      ? "Status code: ${e.statusCode}"
-                      : (e is DioException)
-                          ? "Status code: ${e.response?.statusCode}"
-                          : null)
-              .build(context),
-        );
+      if (e is DioException) {
+        if (e.response?.statusCode == 401) {
+          setState(() {
+            loginError = AuthLocalizations.of(context).loginErrorUnauthorized;
+            return;
+          });
+        }
       }
+
       widget.onException(e);
     }
   }

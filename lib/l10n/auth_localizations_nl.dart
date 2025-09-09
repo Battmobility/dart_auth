@@ -12,7 +12,7 @@ class AuthLocalizationsNl extends AuthLocalizations {
   String get loginTitle => 'Meld je aan';
 
   @override
-  String get genericCancelLabel => 'Annsuleren';
+  String get genericCancelLabel => 'Annuleren';
 
   @override
   String get loginButtonTitle => 'Log in';
@@ -31,11 +31,19 @@ class AuthLocalizationsNl extends AuthLocalizations {
       'Gebruikersnaam moet minstens 6 karakters lang zijn';
 
   @override
+  String get loginErrorInvalidEmail =>
+      'Gebruikersnaam moet een geldig emailadres zijn';
+
+  @override
   String get loginErrorShortPassword =>
       'Wachtwoord moet minstens 8 karakters lang zijn';
 
   @override
   String get forgotPasswordLabel => 'Wachtwoord vergeten?';
+
+  @override
+  String get loginErrorUnauthorized =>
+      'Aanmelden mislukt, controleer je inloggegevens';
 
   @override
   String get loginErrorMessage =>

@@ -31,11 +31,17 @@ class AuthLocalizationsEn extends AuthLocalizations {
       'Username must be at least 6 characters long';
 
   @override
+  String get loginErrorInvalidEmail => 'Username must be a valid email address';
+
+  @override
   String get loginErrorShortPassword =>
       'Password must be at least 8 characters long';
 
   @override
   String get forgotPasswordLabel => 'Forgot password?';
+
+  @override
+  String get loginErrorUnauthorized => 'Login failed, check your credentials';
 
   @override
   String get loginErrorMessage =>

@@ -35,6 +35,11 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"loginErrorInvalidEmail": "Username must be a valid email address",
+	"@loginErrorInvalidEmail": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"loginErrorShortPassword": "Password must be at least 8 characters long",
 	"@loginErrorShortPassword": {
 		"type": "text",
@@ -42,6 +47,11 @@
 	},
 	"forgotPasswordLabel": "Forgot password?",
 	"@forgotPasswordLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loginErrorUnauthorized": "Login failed, check your credentials",
+	"@loginErrorUnauthorized": {
 		"type": "text",
 		"placeholders": {}
 	},
