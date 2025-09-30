@@ -1,7 +1,5 @@
 import 'package:batt_auth/authentication/utils/email_validator.dart';
-import 'package:batt_auth/authentication/utils/text_size.dart';
 import 'package:batt_ds/batt_ds.dart';
-import 'package:batt_auth/authentication/data/services/api_exception.dart';
 import 'package:batt_auth/authentication/domain/domain.dart';
 import 'package:batt_auth/l10n/auth_localizations.dart';
 import 'package:dio/dio.dart';
@@ -94,11 +92,18 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                             .copyWith(color: AppColors.neutralColors[600])),
                     SizedBox(height: AppSpacings.xs),
                     TextFormField(
-                      autofillHints: [AutofillHints.email],
+                      autofillHints: [
+                        AutofillHints.username,
+                        AutofillHints.email
+                      ],
                       controller: _emailController,
                       decoration: InputDecoration(),
                       keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       autofocus: true,
+                      onFieldSubmitted: (value) {
+                        FocusScope.of(context).nextFocus();
+                      },
                       validator: (value) {
                         if (!value.isValidEmail()) {
                           return l10n.loginErrorInvalidEmail;
@@ -150,6 +155,7 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
                       },
                       obscureText: _obscurePassword,
                       keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.done,
                       onEditingComplete: () async {
                         if (_formKey.currentState!.validate()) {
                           _login(userName, password);
@@ -240,13 +246,13 @@ class _LoginEntryWidgetState extends State<LoginEntryWidget> {
 
   void _login(String email, String password) async {
     try {
-      TextInput.finishAutofillContext();
       setState(() {
         loginError = null;
       });
       FocusScope.of(context).unfocus();
       final token =
           await widget.authRepo.loginUser(userName: email, password: password);
+      TextInput.finishAutofillContext();
       widget.onLogin(token);
     } catch (e, _) {
       if (e is DioException) {
